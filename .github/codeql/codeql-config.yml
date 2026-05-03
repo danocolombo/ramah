@@ -1,0 +1,29 @@
+# CodeQL configuration (advanced setup)
+# https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#using-a-custom-configuration-file
+
+name: Ramah CodeQL
+
+# Default CodeQL queries stay enabled unless you set disable-default-queries: true
+# disable-default-queries: false
+
+# Scope: omit `paths` to analyze the whole repo (minus ignores). Uncomment to limit to app source only.
+# paths:
+#   - src
+
+paths-ignore:
+  - node_modules
+  - "**/node_modules/**"
+  - build
+  - dist
+  - coverage
+
+# Optional: extra query suites (more findings, longer CI). Uncomment one block as needed.
+# queries:
+#   - uses: security-extended
+# queries:
+#   - uses: security-and-quality
+
+# Optional: filter specific rules (example — uncomment and adjust rule IDs from SARIF)
+# query-filters:
+#   - exclude:
+#       id: js/path-injection

@@ -1,0 +1,55 @@
+# Runs CodeQL using the custom config in .github/codeql/codeql-config.yml
+# https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning
+
+name: CodeQL
+
+on:
+  push:
+    branches: ["2026.05.03"]
+    # branches: [main, "2026.05.03"]
+  # pull_request:
+  #   branches: [main, "2026.05.03"]
+  workflow_dispatch:
+  # The "schedule:" key is used in GitHub Actions workflows to define a schedule for running the workflow automatically at specific times or intervals using cron syntax.
+  # In this context, it enables the workflow to be triggered periodically based on the schedule(s) you specify.
+  # The cron string(s) that define the schedule should be provided as items under this key.
+  # Example:
+  # schedule:
+  #   - cron: "24 6 * * 1"  # This runs the workflow every Monday at 06:24 UTC.
+  # schedule:
+  #   - cron: "24 6 * * 1"
+
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze (JavaScript)
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          config-file: ./.github/codeql/codeql-config.yml
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
