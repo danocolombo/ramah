@@ -1,6 +1,3 @@
-# Personal Website
+# ramah
 
-This project build with create-react-app and using the Material-UI features.
-
-## AWS release
-This we released to AWS S3 produciton in January 2022.
+This repository is a **static website**: the app is built into plain HTML, CSS, and JavaScript and served as fixed files (no server-rendered pages). It is implemented with React (`react-scripts`) and produces a static bundle via `yarn build` / `npm run build`.
