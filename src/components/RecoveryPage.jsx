@@ -1,17 +1,19 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { useMemo } from "react";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 // import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import ButtonArrow from "./ui/ButtonArrow";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
 
-const useStyles = makeStyles((theme) => ({
+function getRecoveryPageSx(theme) {
+  return {
   mainContainer: {
     display: "flex",
     flexDirection: "column",
@@ -149,15 +151,19 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "2em",
     },
   },
-}));
 
-export default function LandingPage(props) {
-  const classes = useStyles();
+  };
+}
+
+
+
+export default function RecoveryPage(props) {
   const theme = useTheme();
+  const sx = useMemo(() => getRecoveryPageSx(theme), [theme]);
 
   return (
-    <Grid container direction="column" className={classes.mainContainer}>
-      <Grid item className={classes.breadcrumbsContainer}>
+    <Grid container direction="column" sx={sx.mainContainer}>
+      <Grid item sx={sx.breadcrumbsContainer}>
         <Breadcrumbs aria-label="breadcrumb">
           <Link underline="hover" color="inherit" href="/">
             Main
@@ -165,23 +171,23 @@ export default function LandingPage(props) {
           <Typography color="text.primary">Recovery</Typography>
         </Breadcrumbs>
       </Grid>
-      <div className={classes.recoveryBlock}>
+      <Box sx={sx.recoveryBlock}>
         {/*-----The Recovery Block-----*/}
 
-        <Card className={classes.recoveryCard}>
+        <Card sx={sx.recoveryCard}>
           <CardContent>
             <Grid
               container
               direction="column"
               alignContent="center"
-              justify="center"
+              justifyContent="center"
               style={{ textAlign: "center" }}
             >
               <Grid item>
                 <Typography
                   variant="h3"
                   gutterBottom
-                  className={classes.cardTitle}
+                  sx={sx.cardTitle}
                 >
                   Recovery Advocate
                 </Typography>
@@ -189,7 +195,7 @@ export default function LandingPage(props) {
               <Grid item>
                 <Typography
                   variant="subtitle1"
-                  className={classes.cardParagraph}
+                  sx={sx.cardParagraph}
                 >
                   I understood myself only after I destroyed myself; and only in
                   the process of healing, have I come to know who I really am.
@@ -198,8 +204,8 @@ export default function LandingPage(props) {
             </Grid>
           </CardContent>
         </Card>
-      </div>
-      <div className={classes.introParagraph}>
+      </Box>
+      <Box sx={sx.introParagraph}>
           <Typography variant="bodyPlain" >
             Life has been a challenge and my childhood was difficult, but I
             never knew. We only know what we know. Our only reference we have
@@ -215,27 +221,27 @@ export default function LandingPage(props) {
             came to understand that my tendency to self-medicate was not the
             problem, but just a symptom of something bigger going on.
           </Typography>
-      </div>
-      <div className={classes.topics}>
+      </Box>
+      <Box sx={sx.topics}>
           {/* <Typography
             variant="subtitle1"
-            className={classes.SobrietyRecoveryDefs}
+            sx={sx.SobrietyRecoveryDefs}
           > */}
-            <span className={classes.recoveryTerm}>Sobriety: </span>
+            <Box component="span" sx={sx.recoveryTerm}>Sobriety: </Box>
             {/* {matchesMD ? <br/> : null } */}
-            <span className={classes.recoveryDef}>
+            <Box component="span" sx={sx.recoveryDef}>
               the state of not being intoxicated.
-            </span>
+            </Box>
             <br />
-            <span className={classes.recoveryTerm}>Recovery: </span>
+            <Box component="span" sx={sx.recoveryTerm}>Recovery: </Box>
             {/* {matchesMD ? <br/> : null } */}
-            <span className={classes.recoveryDef}>
+            <Box component="span" sx={sx.recoveryDef}>
               return to a normal state of health, mind or strength.
-            </span>
+            </Box>
           {/* </Typography> */}
-        </div>
-        <div className={classes.introParagraph}>
-          <Typography variant="bodyPlain" className={classes.introParagraph}>
+        </Box>
+        <Box sx={sx.introParagraph}>
+          <Typography variant="bodyPlain" sx={sx.introParagraph}>
             Through years of striving and trying, I finally found a program
             called Celebrate Recovery (CR), that helped me get past my
             medicating challeenges and deal with the root of the challenges and
@@ -247,26 +253,26 @@ export default function LandingPage(props) {
             Contact me if you want some more information, or click the "Find a
             Group" link below.
           </Typography>
-        </div>
+        </Box>
       
 
       <div>
-        <div className={classes.buttonWrapper}>
+        <Box sx={sx.buttonWrapper}>
           <Button
             component={Link}
             to="https://locator.crgroups.info/"
-            className={classes.findGroupButtom}
+            sx={sx.findGroupButtom}
             variant="outlined"
             // onClick={() => props.setValue(2)}
           >
-            <div className={classes.buttonText}>Find A Group</div>
+            <Box sx={sx.buttonText}>Find A Group</Box>
             <ButtonArrow
               width={15}
               height={15}
               fill={theme.palette.common.white}
             />
           </Button>
-        </div>
+        </Box>
       </div>
     </Grid>
   );

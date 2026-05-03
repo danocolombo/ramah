@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import React, { useEffect, useMemo } from 'react';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -12,7 +13,8 @@ import engineeringPic from '../assets/computer_glasses.jpg';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import AWSLogo from '../assets/AWS_Logo.svg';
 
-const useStyles = makeStyles((theme) => ({
+function getEngineeringPageSx(theme) {
+  return {
     mainContainer: {
         marginTop: '2em',
         [theme.breakpoints.down('md')]: {
@@ -98,11 +100,44 @@ const useStyles = makeStyles((theme) => ({
     quoted: {
         fontStyle: 'italic',
     },
-}));
+    learnMoreButton: {
+        ...theme.typography.learnButton,
+        fontSize: '0.7rem',
+        height: 35,
+        padding: 5,
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '2em',
+        },
+    },
+    learnButton: {
+        ...theme.typography.learnButton,
+        fontSize: '0.7rem',
+        height: 35,
+        padding: 5,
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '2em',
+        },
+    },
+    icon: {
+        marginLeft: '2em',
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: 0,
+        },
+    },
+    gridItemB2: {},
+    specialText: {
+        fontFamily: 'Pacifico',
+        color: theme.palette.common.orange,
+    },
+
+  };
+}
+
+
 
 export default function EngineeringPage(props) {
-    const classes = useStyles();
     const theme = useTheme();
+  const sx = useMemo(() => getEngineeringPageSx(theme), [theme]);
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     useEffect(() => {
@@ -110,8 +145,8 @@ export default function EngineeringPage(props) {
     }, []);
 
     return (
-        <div className={classes.mainContainer}>
-            <Grid item className={classes.breadcrumbsContainer}>
+        <Box sx={sx.mainContainer}>
+            <Grid item sx={sx.breadcrumbsContainer}>
                 <Breadcrumbs aria-label='breadcrumb'>
                     <Link underline='hover' color='inherit' href='/'>
                         Main
@@ -120,40 +155,40 @@ export default function EngineeringPage(props) {
                 </Breadcrumbs>
             </Grid>
             {/** //   SECTION 1 */}
-            <Typography className={classes.sectionTitle}>
+            <Typography sx={sx.sectionTitle}>
                 Software Engineering
             </Typography>
-            <div className={classes.flexContainer}>
-                <div className={classes.flexLeft}>
-                    <Typography className={classes.sectionText}>
+            <Box sx={sx.flexContainer}>
+                <Box sx={sx.flexLeft}>
+                    <Typography sx={sx.sectionText}>
                         “Strive for perfection in everything you do. Take the
                         best that exists and make it better. When it does not
                         exist, design it.”
                     </Typography>
-                    <Typography variant='subtitle1' className={classes.quoted}>
+                    <Typography variant='subtitle1' sx={sx.quoted}>
                         Sir Henry Royce
                     </Typography>
-                </div>
-                <div className={classes.flexRight}>
-                    <img
-                        className={classes.graphic}
+                </Box>
+                <Box sx={sx.flexRight}>
+                    <Box component="img"
+                        sx={sx.graphic}
                         alt='desktop view'
                         src={engineeringPic}
                         height='200px'
                     />
-                </div>
-            </div>
+                </Box>
+            </Box>
             {/** //   SECTION 2 */}
-            <Typography className={classes.sectionTitle}>
+            <Typography sx={sx.sectionTitle}>
                 AWS Cloud Technology
             </Typography>
-            <div className={classes.flexContainer}>
-                <div className={classes.flexLeft}>
-                    <Typography className={classes.sectionText}>
+            <Box sx={sx.flexContainer}>
+                <Box sx={sx.flexLeft}>
+                    <Typography sx={sx.sectionText}>
                         Leader in Cloud Technology. Experience through the
                         stack.
                     </Typography>
-                    <Typography className={classes.sectionText}>
+                    <Typography sx={sx.sectionText}>
                         Design, architecture, development and delivery.
                         {matchesSM ? null : <br />}Not just training.
                     </Typography>
@@ -162,7 +197,7 @@ export default function EngineeringPage(props) {
                         href='/aws'
                         to='/aws'
                         variant='outlined'
-                        className={classes.learnMoreButton}
+                        sx={sx.learnMoreButton}
                         onClick={() => {
                             props.setValue(1);
                             props.setSelectedIndex(2);
@@ -176,42 +211,42 @@ export default function EngineeringPage(props) {
                             fill={theme.palette.common.blue}
                         />
                     </Button>
-                </div>
-                <div className={classes.flexRight}>
+                </Box>
+                <Box sx={sx.flexRight}>
                     {/* {matchesMD ? null : ( */}
-                    <Grid item className={classes.gridItemB2}>
-                        <img
-                            className={classes.icon}
+                    <Grid item sx={sx.gridItemB2}>
+                        <Box component="img"
+                            sx={sx.icon}
                             alt='mobile phone icon'
                             src={AWSLogo}
                             width='250em'
                         />
                     </Grid>
                     {/* )} */}
-                </div>
-            </div>
+                </Box>
+            </Box>
             {/** //   SECTION 3 */}
-            <Typography className={classes.sectionTitle}>
+            <Typography sx={sx.sectionTitle}>
                 Custom Software
             </Typography>
-            <div className={classes.flexContainer}>
-                <div className={classes.flexLeft}>
-                    <Typography className={classes.sectionText}>
+            <Box sx={sx.flexContainer}>
+                <Box sx={sx.flexLeft}>
+                    <Typography sx={sx.sectionText}>
                         Save Energy. {matchesSM ? null : <br />}Save Time.{' '}
                         {matchesSM ? null : <br />}Save Money.
                     </Typography>
-                    <Typography className={classes.sectionText}>
+                    <Typography sx={sx.sectionText}>
                         Complete digital solutions, from investigation to{' '}
-                        <span className={classes.specialText}>
+                        <Box component="span" sx={sx.specialText}>
                             celebration.
-                        </span>
+                        </Box>
                     </Typography>
                     <Button
                         component={Link}
                         to='/customsoftware'
                         href='/customsoftware'
                         variant='outlined'
-                        className={classes.learnButton}
+                        sx={sx.learnButton}
                         onClick={() => {
                             props.setValue(1);
                             props.setSelectedIndex(1);
@@ -224,16 +259,16 @@ export default function EngineeringPage(props) {
                             fill={theme.palette.common.blue}
                         />
                     </Button>
-                </div>
-                <div className={classes.flexRight}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.flexRight}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='custom software icon'
                         src={customSoftwareIcon}
                         width='250em'
                     />
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 }

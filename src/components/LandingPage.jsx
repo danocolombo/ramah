@@ -1,12 +1,13 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { useMemo } from "react";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import ButtonArrow from "../components/ui/ButtonArrow";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 // import mobileBackground from "../assets/aci-terzza-sunset-mobile.png";
 // import background from "../assets/aci-terzza-sunset.jpg";
 import background from "../assets/creativeInspiration.jpg";
@@ -17,7 +18,8 @@ import WoodshopDisplay from "./ui/Woodshop";
 
 import recoveryBackground from "../assets/repeatingBackground.svg";
 
-const useStyles = makeStyles((theme) => ({
+function getLandingPageSx(theme) {
+  return {
   animation: {
     maxWidth: "50em",
     minWidth: "21em",
@@ -206,26 +208,30 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
   },
-}));
+
+  };
+}
+
+
 
 export default function LandingPage(props) {
-  const classes = useStyles();
   const theme = useTheme();
+  const sx = useMemo(() => getLandingPageSx(theme), [theme]);
 
   return (
-    <Grid container direction="column" className={classes.mainContainer}>
-      <div className={classes.background}>
-        <div className={classes.introWrapper}>
-          <Typography variant="h4" className={classes.introductionParagraph}>
+    <Grid container direction="column" sx={sx.mainContainer}>
+      <Box sx={sx.background}>
+        <Box sx={sx.introWrapper}>
+          <Typography variant="h4" sx={sx.introductionParagraph}>
             to contribute to something that makes a real difference in other
             people's lives
           </Typography>
           <div align="center">
-            <div className={classes.buttonContainer}>
+            <Box sx={sx.buttonContainer}>
               <Button
                 component={Link}
                 to="/engineering"
-                className={classes.engineeringButton}
+                sx={sx.engineeringButton}
                 variant="outlined"
                 align="center"
                 onClick={() => props.setValue(2)}
@@ -237,10 +243,10 @@ export default function LandingPage(props) {
                   fill={theme.palette.common.blue}
                 />
               </Button>
-            </div>
+            </Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       <Grid item>
         {/*-----The Recovery Block-----*/}
@@ -248,10 +254,10 @@ export default function LandingPage(props) {
           container
           // style={{ height: "40em", marginTop: "0em" }}
           // alignItems="center"
-          justify="center"
-          className={classes.recoveryContainer}
+          justifyContent="center"
+          sx={sx.recoveryContainer}
         >
-          <Card className={classes.recoveryCard}>
+          <Card sx={sx.recoveryCard}>
             <CardContent>
               <Grid
                 container
@@ -266,7 +272,7 @@ export default function LandingPage(props) {
                 <Grid item>
                   <Typography
                     variant="subtitle1"
-                    className={classes.recoveryQutote}
+                    sx={sx.recoveryQutote}
                   >
                     I understood myself only after I destroyed myself; and only
                     <br />
@@ -276,7 +282,7 @@ export default function LandingPage(props) {
                   <Button
                     component={Link}
                     to="/recovery"
-                    className={classes.learnButtonRecovery}
+                    sx={sx.learnButtonRecovery}
                     variant="outlined"
                     onClick={() => props.setValue(2)}
                   >
@@ -291,7 +297,7 @@ export default function LandingPage(props) {
               </Grid>
             </CardContent>
           </Card>
-          <div className={classes.recoveryBackground} />
+          <Box sx={sx.recoveryBackground} />
         </Grid>
       </Grid>
       <Grid item>

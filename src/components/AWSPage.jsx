@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useMemo } from 'react';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -17,7 +18,8 @@ import AWS_RDS from '../assets/AWS_RDS.svg';
 import AWS_DynamoDB from '../assets/AWS_DynamoDB.svg';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 
-const useStyles = makeStyles((theme) => ({
+function getAWSPageSx(theme) {
+  return {
     mainContainer: {
         marginTop: '2em',
         [theme.breakpoints.down('md')]: {
@@ -172,11 +174,15 @@ const useStyles = makeStyles((theme) => ({
     quoted: {
         fontStyle: 'italic',
     },
-}));
 
-export default function EngineeringPage(props) {
-    const classes = useStyles();
+  };
+}
+
+
+
+export default function AWSPage(props) {
     const theme = useTheme();
+  const sx = useMemo(() => getAWSPageSx(theme), [theme]);
 
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     useEffect(() => {
@@ -184,8 +190,8 @@ export default function EngineeringPage(props) {
     }, []);
 
     return (
-        <div className={classes.mainContainer}>
-            <Grid item className={classes.breadcrumbsContainer}>
+        <Box sx={sx.mainContainer}>
+            <Grid item sx={sx.breadcrumbsContainer}>
                 <Breadcrumbs aria-label='breadcrumb'>
                     <Link underline='hover' color='inherit' href='/'>
                         Main
@@ -197,11 +203,11 @@ export default function EngineeringPage(props) {
                 </Breadcrumbs>
             </Grid>
             {/** //   SECTION 1 */}
-            <Typography className={classes.sectionTitle}>
+            <Typography sx={sx.sectionTitle}>
                 Officially Certified
             </Typography>
-            <div className={classes.flexContainer}>
-                <div className={classes.flexLeft}>
+            <Box sx={sx.flexContainer}>
+                <Box sx={sx.flexLeft}>
                     <Typography>
                         Serious needs, requires serious commitment.
                     </Typography>
@@ -211,36 +217,36 @@ export default function EngineeringPage(props) {
                         {matchesSM ? null : <br />}But actually taking the time
                         to get seriously educated and experienced.
                     </Typography>
-                </div>
-                <div className={classes.flexRight}>
-                    <img
-                        className={classes.certIcon}
+                </Box>
+                <Box sx={sx.flexRight}>
+                    <Box component="img"
+                        sx={sx.certIcon}
                         alt='AWS Certified Architect'
                         src={AWS_SAA_Logo}
                         // width="250em"
                     />
                     {matchesSM ? null : <br />}
-                    <img
-                        className={classes.certIcon}
+                    <Box component="img"
+                        sx={sx.certIcon}
                         alt='AWS Certified Developer'
                         src={AWS_DA_Logo}
                         // width="250em"
                     />
                     {matchesSM ? null : <br />}
-                    <img
-                        className={classes.certIcon}
+                    <Box component="img"
+                        sx={sx.certIcon}
                         alt='AWS Cloud Practioner'
                         src={AWS_CP_Logo}
                         // width="250em"
                     />
-                </div>
-            </div>
+                </Box>
+            </Box>
             {/** //   SECTION 2 */}
-            <Typography className={classes.sectionTitle}>
+            <Typography sx={sx.sectionTitle}>
                 Full-Stack Experience
             </Typography>
-            <div className={classes.flexContainer}>
-                <div className={classes.flexLeft}>
+            <Box sx={sx.flexContainer}>
+                <Box sx={sx.flexLeft}>
                     <Typography>
                         Top to bottom; {matchesSM ? null : <br />}Inside-out.
                     </Typography>
@@ -250,35 +256,35 @@ export default function EngineeringPage(props) {
                         {matchesSM ? null : <br />}Doing what is necessary to
                         make things happen.
                     </Typography>
-                </div>
-                <div className={classes.flexRight}>
+                </Box>
+                <Box sx={sx.flexRight}>
                     {/* {matchesMD ? null : ( */}
-                    <Grid item className={classes.gridItemB2}>
-                        <img
-                            className={classes.icon}
+                    <Grid item sx={sx.gridItemB2}>
+                        <Box component="img"
+                            sx={sx.icon}
                             alt='custom software'
                             src={customSoftwareIcon}
                             width='250em'
                         />
                     </Grid>
                     {/* )} */}
-                </div>
-            </div>
+                </Box>
+            </Box>
             {/** //   SECTION 3 */}
-            <div className={classes.techContainer}>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+            <Box sx={sx.techContainer}>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS Serverless1'
                         src={AWS_Serverless}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         AWS Serverless
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         Serverless computing offers a number of advantages over
                         traditional cloud-based or server-centric
                         infrastructure. For many developers, serverless
@@ -286,98 +292,98 @@ export default function EngineeringPage(props) {
                         flexibility, and quicker time to release, all at a
                         reduced cost.
                     </Typography>
-                </div>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS Amplify1'
                         src={AWS_Amplify}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         AWS Amplify
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         Certralized user management, supporting user federation
                         authentication, across platforms and integrating backend
                         services.
                     </Typography>
-                </div>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS API Gateway'
                         src={AWS_APIGateway}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         API Gateway
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         Robust, scalable and secure REST APIs available in the
                         cloud without the need for provisioning or maintaining
                         host servers. Focus on the SAAS API you need and leave
                         the server maintenance to AWS.
                     </Typography>
-                </div>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS Lambda'
                         src={AWS_Lambda}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         Lambda Functions
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         Execution in the cloud with no need to for system
                         resources or maintenance. Get work done and focus on the
                         business needs.
                     </Typography>
-                </div>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS RDS'
                         src={AWS_RDS}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         Relational Databases
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         Relational databases that include MySQL, PostgreSQL, and
                         MariaDB
                     </Typography>
-                </div>
-                <div className={classes.techLeft}>
-                    <img
-                        className={classes.icon}
+                </Box>
+                <Box sx={sx.techLeft}>
+                    <Box component="img"
+                        sx={sx.icon}
                         alt='AWS DynamoDB'
                         src={AWS_DynamoDB}
                         // width="250em"
                     />
-                </div>
-                <div className={classes.techRight}>
-                    <Typography className={classes.techTopic}>
+                </Box>
+                <Box sx={sx.techRight}>
+                    <Typography sx={sx.techTopic}>
                         No-SQL Databases
                     </Typography>
-                    <Typography className={classes.techDescription}>
+                    <Typography sx={sx.techDescription}>
                         DynamoDB is a fully managed, key-value, and document
                         database that delivers single-digit-millisecond
                         performance at any scale.
                     </Typography>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 }

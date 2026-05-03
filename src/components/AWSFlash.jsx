@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Hidden from "@material-ui/core/Hidden";
-
+import { useTheme } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import backArrow from "../assets/backArrow.svg";
 import forwardArrow from "../assets/forwardArrow.svg";
 import lightbulb from "../assets/bulb.svg";
@@ -22,7 +20,8 @@ import uxAnimation from "../animations/uxAnimation/data";
 
 import CallToAction from "./ui/CallToAction";
 
-const useStyles = makeStyles(theme => ({
+function getAWSFlashSx(theme) {
+  return {
   heading: {
     maxWidth: "40em"
   },
@@ -40,14 +39,19 @@ const useStyles = makeStyles(theme => ({
   itemContainer: {
     maxWidth: "40em"
   }
-}));
 
-export default function AWSPage(props) {
-  const classes = useStyles();
+  };
+}
+
+
+
+export default function AWSFlash(props) {
   const theme = useTheme();
+  const sx = useMemo(() => getAWSFlashSx(theme), [theme]);
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesLGUp = useMediaQuery(theme.breakpoints.up("lg"));
 
   const documentsOptions = {
     loop: true,
@@ -91,14 +95,14 @@ export default function AWSPage(props) {
         item
         container
         direction="row"
-        justify={matchesMD ? "center" : undefined}
-        className={classes.rowContainer}
+        justifyContent={matchesMD ? "center" : undefined}
+        sx={sx.rowContainer}
         style={{ marginTop: matchesXS ? "1em" : "2em" }}
       >
-        <Hidden mdDown>
+        {matchesLGUp ? (
           <Grid
             item
-            className={classes.arrowContainer}
+            sx={sx.arrowContainer}
             style={{ marginRight: "1em", marginLeft: "-3.5em" }}
           >
             <IconButton
@@ -110,8 +114,8 @@ export default function AWSPage(props) {
               <img src={backArrow} alt="Back to Services Page" />
             </IconButton>
           </Grid>
-        </Hidden>
-        <Grid item container direction="column" className={classes.heading}>
+        ) : null}
+        <Grid item container direction="column" sx={sx.heading}>
           <Grid item>
             <Typography align={matchesMD ? "center" : undefined} variant="h2">
               Custom Software Development
@@ -157,8 +161,8 @@ export default function AWSPage(props) {
             </Typography>
           </Grid>
         </Grid>
-        <Hidden mdDown>
-          <Grid item className={classes.arrowContainer}>
+        {matchesLGUp ? (
+          <Grid item sx={sx.arrowContainer}>
             <IconButton
               style={{ backgroundColor: "transparent" }}
               component={Link}
@@ -171,15 +175,15 @@ export default function AWSPage(props) {
               />
             </IconButton>
           </Grid>
-        </Hidden>
+        ) : null}
       </Grid>
       <Grid
         item
         container
         direction="row"
-        justify="center"
+        justifyContent="center"
         style={{ marginTop: "15em", marginBottom: "20em" }}
-        className={classes.rowContainer}
+        sx={sx.rowContainer}
       >
         <Grid
           item
@@ -236,13 +240,13 @@ export default function AWSPage(props) {
         container
         alignItems={matchesMD ? "center" : undefined}
         direction={matchesMD ? "column" : "row"}
-        justify="space-between"
-        className={classes.rowContainer}
+        justifyContent="space-between"
+        sx={sx.rowContainer}
       >
         <Grid
           item
           container
-          className={classes.itemContainer}
+          sx={sx.itemContainer}
           direction={matchesSM ? "column" : "row"}
           style={{ marginBottom: matchesMD ? "15em" : 0 }}
           md
@@ -292,7 +296,7 @@ export default function AWSPage(props) {
         <Grid
           item
           container
-          className={classes.itemContainer}
+          sx={sx.itemContainer}
           direction={matchesSM ? "column" : "row"}
           md
         >
@@ -328,7 +332,7 @@ export default function AWSPage(props) {
         container
         direction="row"
         style={{ marginTop: "20em", marginBottom: "20em" }}
-        className={classes.rowContainer}
+        sx={sx.rowContainer}
       >
         <Grid item container direction="column" alignItems="center">
           <Grid item>
@@ -339,7 +343,7 @@ export default function AWSPage(props) {
               width={matchesSM ? "300em" : "450em"}
             />
           </Grid>
-          <Grid item className={classes.itemContainer}>
+          <Grid item sx={sx.itemContainer}>
             <Typography variant="h4" align="center" gutterBottom>
               Root-Cause Analysis
             </Typography>
@@ -359,14 +363,14 @@ export default function AWSPage(props) {
         container
         alignItems={matchesMD ? "center" : undefined}
         direction={matchesMD ? "column" : "row"}
-        justify="space-between"
+        justifyContent="space-between"
         style={{ marginBottom: "20em" }}
-        className={classes.rowContainer}
+        sx={sx.rowContainer}
       >
         <Grid
           item
           container
-          className={classes.itemContainer}
+          sx={sx.itemContainer}
           direction={matchesSM ? "column" : "row"}
           style={{ marginBottom: matchesMD ? "15em" : 0 }}
           md
@@ -414,7 +418,7 @@ export default function AWSPage(props) {
         <Grid
           item
           container
-          className={classes.itemContainer}
+          sx={sx.itemContainer}
           direction={matchesSM ? "column" : "row"}
           md
         >

@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import React, { useEffect, useMemo } from "react";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
-const useStyles = makeStyles((theme) => ({
+function getCustomSoftwarePageSx(theme) {
+  return {
   mainContainer: {
     marginTop: "2em",
     [theme.breakpoints.down("md")]: {
@@ -137,11 +139,15 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "3em",
     },
   },
-}));
 
-export default function EngineeringPage(props) {
-  const classes = useStyles();
+  };
+}
+
+
+
+export default function CustomSoftwarePage(props) {
   const theme = useTheme();
+  const sx = useMemo(() => getCustomSoftwarePageSx(theme), [theme]);
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   //   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -150,8 +156,8 @@ export default function EngineeringPage(props) {
   }, []);
 
   return (
-    <div className={classes.mainContainer}>
-      <Grid item className={classes.breadcrumbsContainer}>
+    <Box sx={sx.mainContainer}>
+      <Grid item sx={sx.breadcrumbsContainer}>
         <Breadcrumbs aria-label="breadcrumb">
           <Link underline="hover" color="inherit" href="/">
             Main
@@ -165,14 +171,14 @@ export default function EngineeringPage(props) {
       {/* //   =================================== */}
       {/* //   Paragraph 1                         */}
       {/* //   =================================== */}
-      <Typography className={classes.sectionTitleOne}>
+      <Typography sx={sx.sectionTitleOne}>
         Custom Software {matchesMD ? null : "Development"}
       </Typography>
-      <div className={classes.flexContainer}>
-        <div className={classes.paragraphOne}>
+      <Box sx={sx.flexContainer}>
+        <Box sx={sx.paragraphOne}>
           <Typography
           // variant="subtitle1"
-          // className={classes.introductionSection}
+          // sx={sx.introductionSection}
           >
             The reality is that software engineering is not just about a clean
             simple design, code, test and deliver on time life. The challenges
@@ -182,21 +188,21 @@ export default function EngineeringPage(props) {
             <br />
             You might be familiar with the discussions...
           </Typography>
-        </div>
-      </div>
-      <div className={classes.bulletContainerOne}>
+        </Box>
+      </Box>
+      <Box sx={sx.bulletContainerOne}>
         <ul>
           <li>We need to reduce our costs</li>
           <li>One of our components is no longer supported</li>
           <li>We want to add this new feature</li>
           <li>Performance and response times are not acceptable</li>
         </ul>
-      </div>
-      <div className={classes.flexContainer}>
-        <div className={classes.paragraphOne}>
+      </Box>
+      <Box sx={sx.flexContainer}>
+        <Box sx={sx.paragraphOne}>
           <Typography
             variant="subtitle1"
-            // className={classes.introductionSection}
+            // sx={sx.introductionSection}
           >
             And the list goes on. All of these challenges are not your typical
             assignment for someone just getting started in software engineering.
@@ -204,30 +210,30 @@ export default function EngineeringPage(props) {
             have been able to take on these type of challenges and finish with
             satisfaction.
           </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
       {/* //   =================================== */}
       {/* //   Product Evolution                   */}
       {/* //   =================================== */}
-      <Typography className={classes.sectionTitleOne}>
+      <Typography sx={sx.sectionTitleOne}>
         Product Evolution
       </Typography>
-      <div className={classes.flexContainer}>
-        <div className={classes.paragraphOne}>
+      <Box sx={sx.flexContainer}>
+        <Box sx={sx.paragraphOne}>
           <Typography>
             Over the years I have been task with working with one software
             solution for managing a client's meetings. It was custom software,
             originally written in PHP with a MySQL database backend.
           </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
       {/* //   =================================== */}
       {/* //   Phase I                             */}
       {/* //   =================================== */}
-      <Typography className={classes.sectionTitleTwo}>Phase I</Typography>
-      <div className={classes.flexContainerTwo}>
-        <div className={classes.paragraphTwo}>
-          <Typography className={classes.customerNeed}>
+      <Typography sx={sx.sectionTitleTwo}>Phase I</Typography>
+      <Box sx={sx.flexContainerTwo}>
+        <Box sx={sx.paragraphTwo}>
+          <Typography sx={sx.customerNeed}>
             The first desire was to update the user workflows, UI and get off
             the hosted webserver.
           </Typography>
@@ -237,9 +243,9 @@ export default function EngineeringPage(props) {
             React JS (javascript). This front end used what is called the MERN
             stack.
           </Typography>
-        </div>
-      </div>
-      <div className={classes.bulletContainerTwo}>
+        </Box>
+      </Box>
+      <Box sx={sx.bulletContainerTwo}>
         <ul>
           <li>
             <b>M</b>ongoDB - document database
@@ -254,21 +260,21 @@ export default function EngineeringPage(props) {
             <b>N</b>odeJS - the premiere JavaScript web server
           </li>
         </ul>
-      </div>
-      <div className={classes.flexContainerTwo}>
-        <div className={classes.paragraphTwo}>
+      </Box>
+      <Box sx={sx.flexContainerTwo}>
+        <Box sx={sx.paragraphTwo}>
           <Typography>
             This resulted in the client getting a much cleaner, more responsive
             interface and moved the database from a hosted MySQL database to
             MongoDB Atlas. The customer was satisfied with the results of phase
             I.
           </Typography>
-        </div>
-      </div>
-      <Typography className={classes.sectionTitleThree}>
+        </Box>
+      </Box>
+      <Typography sx={sx.sectionTitleThree}>
         Technical Challenges & Highlights
       </Typography>
-      <div className={classes.bulletContainerTwo}>
+      <Box sx={sx.bulletContainerTwo}>
         <ul>
           <li>
             Migrate MySQL (Relational Database) to MongoDB (Document Database)
@@ -277,14 +283,14 @@ export default function EngineeringPage(props) {
             Write new database layer in express to replace PHP/MySQL queries
           </li>
         </ul>
-      </div>
+      </Box>
       {/* //   =================================== */}
       {/* //   Phase II                            */}
       {/* //   =================================== */}
-      <Typography className={classes.sectionTitleTwo}>Phase II</Typography>
-      <div className={classes.flexContainerTwo}>
-        <div className={classes.paragraphTwo}>
-          <Typography className={classes.customerNeed}>
+      <Typography sx={sx.sectionTitleTwo}>Phase II</Typography>
+      <Box sx={sx.flexContainerTwo}>
+        <Box sx={sx.paragraphTwo}>
+          <Typography sx={sx.customerNeed}>
             Move to standard REST interface, decoupling the data layer from the
             UI and move to AWS no-SQL
           </Typography>
@@ -303,12 +309,12 @@ export default function EngineeringPage(props) {
             but it also now exposed the opportunity for API interactions with te
             data and not have it embedded in the solution stack.
           </Typography>
-        </div>
-      </div>
-      <Typography className={classes.sectionTitleThree}>
+        </Box>
+      </Box>
+      <Typography sx={sx.sectionTitleThree}>
         Technical Challenges & Highlights
       </Typography>
-      <div className={classes.bulletContainerTwo}>
+      <Box sx={sx.bulletContainerTwo}>
         <ul>
           <li>
             Migrate MongoDB (Document Database) to AWS DynamoDB (NOSQL Database)
@@ -320,7 +326,7 @@ export default function EngineeringPage(props) {
             Database interfaces and business logic moved to AWS Lambda functions
           </li>
         </ul>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

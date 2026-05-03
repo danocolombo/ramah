@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { styled } from '@mui/material/styles';
+import React, { useEffect, useMemo } from 'react';
+import Box from "@mui/material/Box";
+import { styled, useTheme } from '@mui/material/styles';
 // import { Link } from "react-router-dom";
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -22,8 +22,8 @@ import CardActions from '@mui/material/CardActions';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 import TechSledPic from '../assets/TechSled.svg';
 import CoatRack from '../assets/WS-Coat-Rack.svg';
@@ -41,7 +41,8 @@ import BBQChickenMarinade from '../assets/kitchen/marinaded-chicken.png';
 //   if you use 3 spaces you get YELLOW
 //+++++++++++++++++++++++++++++++++++++++++
 
-const useStyles = makeStyles((theme) => ({
+function getHobbiesPageSx(theme) {
+  return {
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -198,7 +199,11 @@ const useStyles = makeStyles((theme) => ({
         //     marginBottom: '2em',
         // },
     },
-}));
+
+  };
+}
+
+
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -211,9 +216,10 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function LandingPage(props) {
+export default function HobbiesPage(props) {
     const [expanded, setExpanded] = React.useState(false);
-    const classes = useStyles();
+    const theme = useTheme();
+  const sx = useMemo(() => getHobbiesPageSx(theme), [theme]);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -232,8 +238,8 @@ export default function LandingPage(props) {
     //   },
     // };
     return (
-        <div className={classes.mainContainer}>
-            <Grid item className={classes.breadcrumbsContainer}>
+        <Box sx={sx.mainContainer}>
+            <Grid item sx={sx.breadcrumbsContainer}>
                 <Breadcrumbs aria-label='breadcrumb'>
                     <Link underline='hover' color='inherit' href='/'>
                         Main
@@ -241,8 +247,8 @@ export default function LandingPage(props) {
                     <Typography color='text.primary'>Hobbies</Typography>
                 </Breadcrumbs>
             </Grid>
-            <Grid item className={classes.hobbyBlock}>
-                <Typography variant='body1' className={classes.basicParagraph}>
+            <Grid item sx={sx.hobbyBlock}>
+                <Typography variant='body1' sx={sx.basicParagraph}>
                     There are times of hard work, but there also has to be a
                     balance of difference. The moments of just escaping from the
                     moment into a healthy interaction. Not to waste time, but
@@ -250,18 +256,18 @@ export default function LandingPage(props) {
                     These are a few of my favorite things...
                 </Typography>
             </Grid>
-            <Grid item className={classes.hobbyBlock}>
+            <Grid item sx={sx.hobbyBlock}>
                 {/*-----Woodshop Block-----*/}
                 <Typography
                     variant='h2'
                     id='woodshop'
-                    className={classes.centeredTitle}
+                    sx={sx.centeredTitle}
                 >
                     Woodworking
                 </Typography>
             </Grid>
-            <Grid item className={classes.hobbyBlock}>
-                <Typography className={classes.basicParagraph}>
+            <Grid item sx={sx.hobbyBlock}>
+                <Typography sx={sx.basicParagraph}>
                     It started all the way back in middle school, or what we
                     used to call Junior High. It was a great class that gave me
                     a sense of worth and accomplishment. To be able to make
@@ -276,15 +282,15 @@ export default function LandingPage(props) {
                     to something.
                 </Typography>
             </Grid>
-            <Grid item className={classes.hobbyBlock}>
-                <img
-                    className={classes.woodPic}
+            <Grid item sx={sx.hobbyBlock}>
+                <Box component="img"
+                    sx={sx.woodPic}
                     alt='Tech Sled'
                     src={TechSledPic}
                 />
             </Grid>
-            <Grid className={classes.woodGalleryContainer}>
-                <ImageList className={classes.woodGaleryList}>
+            <Grid sx={sx.woodGalleryContainer}>
+                <ImageList sx={sx.woodGaleryList}>
                     <ImageListItem key='Subheader' cols={2}>
                         <ListSubheader component='div'>
                             <Typography variant='h3'>
@@ -319,14 +325,14 @@ export default function LandingPage(props) {
                 </ImageList>
             </Grid>
 
-            <Grid item className={classes.hobbyBlock}>
+            <Grid item sx={sx.hobbyBlock}>
                 {/*-----Kitchen Block-----*/}
-                <Typography variant='h2' className={classes.centeredTitle}>
+                <Typography variant='h2' sx={sx.centeredTitle}>
                     Kitchen
                 </Typography>
             </Grid>
-            <Grid item className={classes.hobbyBlock}>
-                <Typography className={classes.basicParagraph}>
+            <Grid item sx={sx.hobbyBlock}>
+                <Typography sx={sx.basicParagraph}>
                     It takes a lot of energy to focus and work hard, then when
                     we have a hobby that also requires us eo exert more physical
                     energy, we need to re-fuel.
@@ -341,9 +347,9 @@ export default function LandingPage(props) {
                 </Typography>
             </Grid>
             {/* RECIPES */}
-            <Grid className={classes.recipeContainer}>
+            <Grid sx={sx.recipeContainer}>
                 {recipes.map((recipe) => (
-                    <Card className={classes.recipeCard}>
+                    <Card sx={sx.recipeCard}>
                         <CardHeader
                             avatar={
                                 <Avatar
@@ -361,10 +367,10 @@ export default function LandingPage(props) {
                             title={recipe.title}
                             subheader='September 14, 2016'
                         />
-                        <img
+                        <Box component="img"
                             src={recipe.picture}
                             alt='salsa'
-                            className={classes.recipePic}
+                            sx={sx.recipePic}
                         />
 
                         <CardContent>
@@ -372,7 +378,7 @@ export default function LandingPage(props) {
                                 dangerouslySetInnerHTML={{
                                     __html: recipe.overview,
                                 }}
-                            ></div>
+                            />
                         </CardContent>
                         {/* <CardContent>recipe.overview</CardContent> */}
                         <CardActions disableSpacing>
@@ -394,13 +400,13 @@ export default function LandingPage(props) {
                                     dangerouslySetInnerHTML={{
                                         __html: recipe.description,
                                     }}
-                                ></div>
+                                />
                             </CardContent>
                         </Collapse>
                     </Card>
                 ))}
             </Grid>
-        </div>
+        </Box>
     );
 }
 //woodshop projects
@@ -433,7 +439,7 @@ const recipes = [
     to cook together with your guests. Add 1 cup of frozen peas
     along with the mussels, if you like.
   </Typography>`,
-        description: `<Typography className={classes.sectionParagraph}>
+        description: `<Typography sx={sx.sectionParagraph}>
     It started all the way back in middle school, or what we used to
     call Junior High. It was a great class that gave me a sense of
     worth and accomplishment. To be able to make something that I
@@ -452,8 +458,8 @@ const recipes = [
         title: 'Gunpowder Guac',
         picture: GuacPic,
         origin: 'modified from Betty Crocker party recipes',
-        overview: `<Typography className={classes.sectionParagraph}>Avacados with a flavorful kick.</Typography>`,
-        description: `<Typography className={classes.sectionParagraph}>
+        overview: `<Typography sx={sx.sectionParagraph}>Avacados with a flavorful kick.</Typography>`,
+        description: `<Typography sx={sx.sectionParagraph}>
     <B>INGREDIENTS</B><br/>
     2 avacados, chopped<br/>
     1 T lime juice<br/>
@@ -468,8 +474,8 @@ const recipes = [
         title: 'BBQ Chicken Marinade',
         picture: BBQChickenMarinade,
         origin: 'https://www.momontimeout.com/the-best-chicken-marinade-recipe/',
-        overview: `<Typography className={classes.sectionParagraph}>A delicious new marinade that we tried and immediately everyone said, "It's a keeper", Enjoy!!</Typography>`,
-        description: `<Typography className={classes.sectionParagraph}>
+        overview: `<Typography sx={sx.sectionParagraph}>A delicious new marinade that we tried and immediately everyone said, "It's a keeper", Enjoy!!</Typography>`,
+        description: `<Typography sx={sx.sectionParagraph}>
         Mix all ingredients in dish or ziplock and marinade chicken, then grill.
     <B>INGREDIENTS</B><br/>
     1/2 C olive oil<br/>

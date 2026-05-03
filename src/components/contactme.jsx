@@ -1,14 +1,16 @@
-import { React, useState, Fragment } from "react";
+import React, { useState, Fragment, useMemo } from "react";
+import Box from "@mui/material/Box";
 // import { Link } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import Snackbar from "@material-ui/core/Snackbar";
+import { useTheme } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
@@ -18,7 +20,8 @@ import mobileBackground from "../assets/mobileBackground.jpg";
 import emailIcon from "../assets/email.svg";
 import paperAirplane from "../assets/send.svg";
 
-const useStyles = makeStyles((theme) => ({
+function getcontactmeSx(theme) {
+  return {
   background: {
     backgroundImage: `url(${background})`,
     opacity: "60%",
@@ -89,11 +92,15 @@ const useStyles = makeStyles((theme) => ({
       width: 225,
     },
   },
-}));
+
+  };
+}
+
+
 
 export default function Contact(props) {
-  const classes = useStyles();
   const theme = useTheme();
+  const sx = useMemo(() => getcontactmeSx(theme), [theme]);
 
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
@@ -142,7 +149,7 @@ export default function Contact(props) {
   };
   const onConfirm = () => {
     const to =
-      process.env.REACT_APP_CONTACT_EMAIL || "dano.colombo@gmail.com";
+      import.meta.env.VITE_CONTACT_EMAIL || "dano.colombo@gmail.com";
     const subject = encodeURIComponent("DColombo.com Web Site Message");
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`
@@ -171,14 +178,14 @@ export default function Contact(props) {
   return (
     <Grid container direction="column">
       <Grid item>
-        <div className={classes.breadcrumbsContainer}>
+        <Box sx={sx.breadcrumbsContainer}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link underline="hover" color="inherit" href="/">
               Main
             </Link>
             <Typography color="text.primary">Contact Me</Typography>
           </Breadcrumbs>
-        </div>
+        </Box>
         <Grid container direction="row">
           <Grid
             item
@@ -188,7 +195,7 @@ export default function Contact(props) {
               marginBottom: matchesMD ? "5em" : 0,
               marginTop: matchesSM ? "1em" : matchesMD ? "5em" : 0,
             }}
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             lg={4}
             xl={3}
@@ -304,7 +311,7 @@ export default function Contact(props) {
                     InputProps={{ disableUnderline: true }}
                     id="message"
                     fullWidth
-                    className={classes.message}
+                    sx={sx.message}
                     value={message}
                     multiline
                     rows={10}
@@ -314,7 +321,7 @@ export default function Contact(props) {
                 <Grid
                   item
                   container
-                  justify="center"
+                  justifyContent="center"
                   style={{ marginTop: "2em" }}
                 >
                   <Button
@@ -328,7 +335,7 @@ export default function Contact(props) {
                       emailHelper.length !== 0
                     }
                     variant="contained"
-                    className={classes.sendButton}
+                    sx={sx.sendButton}
                   >
                     {buttonContents}
                   </Button>
@@ -408,7 +415,7 @@ export default function Contact(props) {
                   InputProps={{ disableUnderline: true }}
                   id="message"
                   fullWidth
-                  className={classes.message}
+                  sx={sx.message}
                   value={message}
                   multiline
                   rows={10}
@@ -444,7 +451,7 @@ export default function Contact(props) {
                       emailHelper.length !== 0
                     }
                     variant="contained"
-                    className={classes.sendButton}
+                    sx={sx.sendButton}
                   >
                     {buttonContents}
                   </Button>
@@ -454,19 +461,26 @@ export default function Contact(props) {
           </Dialog>
           <Snackbar
             open={alert.open}
-            message={alertMessage}
-            ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             onClose={() => setAlert({ ...alert, open: false })}
             autoHideDuration={4000}
-          />
+          >
+            <Alert
+              onClose={() => setAlert({ ...alert, open: false })}
+              severity="success"
+              variant="filled"
+              sx={{ width: "100%", bgcolor: alert.color || "#4BB543" }}
+            >
+              {alertMessage}
+            </Alert>
+          </Snackbar>
           <Grid
             item
             container
             direction={matchesMD ? "column" : "row"}
-            className={classes.background}
+            sx={sx.background}
             alignItems="center"
-            justify={matchesMD ? "center" : undefined}
+            justifyContent={matchesMD ? "center" : undefined}
             lg={8}
             xl={9}
           >
@@ -478,7 +492,7 @@ export default function Contact(props) {
               }}
             >
               <Grid container direction="column">
-                <Grid item className={classes.fishingBox}>
+                <Grid item sx={sx.fishingBox}>
                   <Typography
                     variant="h2"
                     align={matchesMD ? "center" : undefined}
@@ -496,14 +510,14 @@ export default function Contact(props) {
                   </Typography>
                   <Grid
                     container
-                    justify={matchesMD ? "center" : undefined}
+                    justifyContent={matchesMD ? "center" : undefined}
                     item
                   >
                     {/* <Button
                       component={Link}
                       to="/revolution"
                       variant="outlined"
-                      className={classes.learnButton}
+                      sx={sx.learnButton}
                       onClick={() => props.setValue(2)}
                     >
                       <span style={{ marginRight: 5 }}>Learn More</span>
@@ -522,7 +536,7 @@ export default function Contact(props) {
                 component={Link}
                 to="/estimate"
                 variant="contained"
-                className={classes.estimateButton}
+                sx={sx.estimateButton}
                 onClick={() => props.setValue(5)}
               >
                 Free Estimate

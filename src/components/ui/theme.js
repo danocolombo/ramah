@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 //common colors used throughout
 const arcBlue = "#0d72bb";
@@ -8,6 +8,7 @@ const fortsonRed = "#DC143C";
 const fortsonBlue = "#0000FF";
 const fortsonBlack = "#000000";
 const fortsonGrey = "#868686";
+
 export default createTheme({
   palette: {
     common: {
@@ -16,6 +17,7 @@ export default createTheme({
       red: `${fortsonRed}`,
       black: `${fortsonBlack}`,
       grey: `${fortsonGrey}`,
+      white: "#ffffff",
     },
     primary: {
       main: `${fortsonBlue}`,
@@ -23,7 +25,6 @@ export default createTheme({
     secondary: {
       main: `${arcOrange}`,
     },
-    
   },
   typography: {
     tab: {
@@ -107,34 +108,36 @@ export default createTheme({
     },
   },
   breakpoints: {
-    //  these are the mimimum width of each size
     values: {
       xs: 0,
       sm: 320,
       md: 360,
       lg: 750,
       xl: 1200,
-      xxl: 1536,
     },
   },
-  overrides: {
+  components: {
     MuiInputLabel: {
-      root: {
-        color: arcBlue,
-        fontSize: "1rem",
+      styleOverrides: {
+        root: {
+          color: arcBlue,
+          fontSize: "1rem",
+        },
       },
     },
     MuiInput: {
-      root: {
-        color: arcGrey,
-        fontWeight: 300,
-      },
-      underline: {
-        "&:before": {
-          borderBottom: `2px solid ${arcBlue}`,
+      styleOverrides: {
+        root: {
+          color: arcGrey,
+          fontWeight: 300,
         },
-        "&:hover:not($disabled):not($focused):not($error):before": {
-          borderBottom: `2px solid ${arcBlue}`,
+        underline: {
+          "&:before": {
+            borderBottom: `2px solid ${arcBlue}`,
+          },
+          "&:hover:not(.Mui-disabled):before": {
+            borderBottom: `2px solid ${arcBlue}`,
+          },
         },
       },
     },
