@@ -1,5 +1,4 @@
 import { React, useState, Fragment } from "react";
-import axios from "axios";
 // import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -9,7 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -19,8 +17,6 @@ import background from "../assets/programmingScreens.png";
 import mobileBackground from "../assets/mobileBackground.jpg";
 import emailIcon from "../assets/email.svg";
 import paperAirplane from "../assets/send.svg";
-import ButtonArrow from "../components/ui/ButtonArrow";
-import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -110,7 +106,6 @@ export default function Contact(props) {
   const [emailHelper, setEmailHelper] = useState("");
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const [alert, setAlert] = useState({ open: false, color: "" });
   const [alertMessage, setAlertMesssage] = useState("");
@@ -146,35 +141,22 @@ export default function Contact(props) {
     }
   };
   const onConfirm = () => {
-    setLoading(true);
-    axios
-      .get(
-        "https://us-central1-dcolombo-material.cloudfunctions.net/sendAnEmail",
-        {
-          params: {
-            email: email,
-            name: name,
-            phone: phone,
-            message: message,
-          },
-        }
-      )
-      .then((res) => {
-        setLoading(false);
-        setOpen(false);
-        setName("");
-        setEmail("");
-        setPhone("");
-        setMessage("");
-        setAlert({ open: true, color: "#4BB543" });
-        setAlertMesssage("Message sent successfully!");
-      })
-      .catch((err) => {
-        setLoading(false);
-        setAlert({ open: true, color: "#FF3232" });
-        setAlertMesssage("Something went wrong! Please try again.");
-        console.error(err);
-      });
+    const to =
+      process.env.REACT_APP_CONTACT_EMAIL || "dano.colombo@gmail.com";
+    const subject = encodeURIComponent("DColombo.com Web Site Message");
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`
+    );
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    setOpen(false);
+    setName("");
+    setEmail("");
+    setPhone("");
+    setMessage("");
+    setAlert({ open: true, color: "#4BB543" });
+    setAlertMesssage(
+      "Your mail app should open—send the message from there to finish."
+    );
   };
   const buttonContents = (
     <Fragment>
@@ -464,7 +446,7 @@ export default function Contact(props) {
                     variant="contained"
                     className={classes.sendButton}
                   >
-                    {loading ? <CircularProgress size={30} /> : buttonContents}
+                    {buttonContents}
                   </Button>
                 </Grid>
               </Grid>

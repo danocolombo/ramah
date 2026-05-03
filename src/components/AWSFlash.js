@@ -15,7 +15,6 @@ import cash from "../assets/cash.svg";
 import stopwatch from "../assets/stopwatch.svg";
 import roots from "../assets/root.svg";
 
-import AWSLogo from "../assets/AWS_Logo.svg"
 import documentsAnimation from "../animations/documentsAnimation/data";
 import scaleAnimation from "../animations/scaleAnimation/data.json";
 import automationAnimation from "../animations/automationAnimation/data.json";

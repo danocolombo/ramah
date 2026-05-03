@@ -1,24 +1,12 @@
 import React, { useEffect } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useMediaQuery } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    breadcrumbsContainer: {
-        marginLeft: '2em',
-    },
-}));
 
 export default function P8Rally(props) {
-    const classes = useStyles();
-    const theme = useTheme();
-    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
-    const matchesXL = useMediaQuery(theme.breakpoints.down('xl'));
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

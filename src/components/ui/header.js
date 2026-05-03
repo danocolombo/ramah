@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -118,10 +118,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const MENU_OPTIONS = [
+  { name: "Engineering", link: "/engineering", activeIndex: 1, selectedIndex: 0 },
+  {
+    name: "AWS Cloud",
+    link: "/aws",
+    activeIndex: 1,
+    selectedIndex: 1
+  },
+  {
+    name: "Custom Software",
+    link: "/customsoftware",
+    activeIndex: 1,
+    selectedIndex: 2
+  },
+  {
+    name: "Enterprise",
+    link: "/enterprise",
+    activeIndex: 1,
+    selectedIndex: 3
+  }
+];
+
 export default function Header(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -132,10 +154,10 @@ export default function Header(props) {
     props.setValue(newValue);
   };
 
-  const handleClick = e => {
+  const handleClick = useCallback(e => {
     setAnchorEl(e.currentTarget);
     setOpenMenu(true);
-  };
+  }, []);
 
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null);
@@ -148,45 +170,26 @@ export default function Header(props) {
     setOpenMenu(false);
   };
 
-  const menuOptions = [
-    { name: "Engineering", link: "/engineering", activeIndex: 1, selectedIndex: 0 },
-    {
-      name: "AWS Cloud",
-      link: "/aws",
-      activeIndex: 1,
-      selectedIndex: 1
-    },
-    {
-      name: "Custom Software",
-      link: "/customsoftware",
-      activeIndex: 1,
-      selectedIndex: 2
-    },
-    {
-      name: "Enterprise",
-      link: "/enterprise",
-      activeIndex: 1,
-      selectedIndex: 3
-    }
-  ];
-
-  const routes = [
-    { name: "Home", link: "/", activeIndex: 0 },
-    {
-      name: "Engineering",
-      link: "/engineering",
-      activeIndex: 1,
-      ariaOwns: anchorEl ? "simple-menu" : undefined,
-      ariaPopup: anchorEl ? "true" : undefined,
-      mouseOver: event => handleClick(event)
-    },
-    { name: "Recovery", link: "/recovery", activeIndex: 2 },
-    { name: "Hobbies", link: "/hobbies", activeIndex: 3 },
-    { name: "Contact Me", link: "/contact", activeIndex: 4 }
-  ];
+  const routes = useMemo(
+    () => [
+      { name: "Home", link: "/", activeIndex: 0 },
+      {
+        name: "Engineering",
+        link: "/engineering",
+        activeIndex: 1,
+        ariaOwns: anchorEl ? "simple-menu" : undefined,
+        ariaPopup: anchorEl ? "true" : undefined,
+        mouseOver: event => handleClick(event)
+      },
+      { name: "Recovery", link: "/recovery", activeIndex: 2 },
+      { name: "Hobbies", link: "/hobbies", activeIndex: 3 },
+      { name: "Contact Me", link: "/contact", activeIndex: 4 }
+    ],
+    [anchorEl, handleClick]
+  );
 
   useEffect(() => {
-    [...menuOptions, ...routes].forEach(route => {
+    [...MENU_OPTIONS, ...routes].forEach(route => {
       switch (window.location.pathname) {
         case `${route.link}`:
           if (props.value !== route.activeIndex) {
@@ -206,7 +209,7 @@ export default function Header(props) {
           break;
       }
     });
-  }, [props.value, menuOptions, props.selectedIndex, routes, props]);
+  }, [props.value, props.selectedIndex, routes, props]);
 
   const tabs = (
     <React.Fragment>
@@ -242,7 +245,7 @@ export default function Header(props) {
         style={{ zIndex: 1302 }}
         keepMounted
       >
-        {menuOptions.map((option, i) => (
+        {MENU_OPTIONS.map((option, i) => (
           <MenuItem
             key={`${option}${i}`}
             component={Link}

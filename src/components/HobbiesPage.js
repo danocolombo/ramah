@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import Lottie from 'react-lottie';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 // import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ButtonArrow from './ui/ButtonArrow';
 import Typography from '@material-ui/core/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -21,14 +18,10 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -40,7 +33,6 @@ import Desk from '../assets/WS-Desk.svg';
 import SalsaPic from '../assets/kitchen/salsa.svg';
 import GuacPic from '../assets/kitchen/guac-square.png';
 import BBQChickenMarinade from '../assets/kitchen/marinaded-chicken.png';
-import { autocompleteClasses } from '@mui/material';
 
 //========================================
 // * Don' forget this
@@ -222,13 +214,6 @@ const ExpandMore = styled((props) => {
 export default function LandingPage(props) {
     const [expanded, setExpanded] = React.useState(false);
     const classes = useStyles();
-    const theme = useTheme();
-    const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
-    const matchesLG = useMediaQuery(theme.breakpoints.down('lg'));
-    const matchesXL = useMediaQuery(theme.breakpoints.down('xl'));
-    const matchesXXL = useMediaQuery(theme.breakpoints.down('xxl'));
 
     const handleExpandClick = () => {
         setExpanded(!expanded);

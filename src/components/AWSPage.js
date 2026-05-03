@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { Grid } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { useMediaQuery } from '@mui/material';
 
-import ButtonArrow from './ui/ButtonArrow';
 import AWS_SAA_Logo from '../assets/AWS-SolutionArchitect.png';
 import AWS_DA_Logo from '../assets/AWS-DeveloperAssociate.png';
 import AWS_CP_Logo from '../assets/AWS-CloudPractitioner.png';
@@ -18,8 +16,6 @@ import AWS_Lambda from '../assets/AWS_Lambda.svg';
 import AWS_RDS from '../assets/AWS_RDS.svg';
 import AWS_DynamoDB from '../assets/AWS_DynamoDB.svg';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
-import AWSLogo from '../assets/AWS_Logo.svg';
-import { typography } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {

@@ -1,30 +1,10 @@
 import React, { useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-// import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
-
-import ButtonArrow from "./ui/ButtonArrow";
-import customSoftwareIcon from "../assets/customSoftwareIcon.svg";
-import AWSLogo from "../assets/AWS_Logo.svg";
-import AWS_SAA_Logo from "../assets/AWS-SolutionArchitect.png";
-import AWS_DA_Logo from "../assets/AWS-DeveloperAssociate.png";
-import AWS_CP_Logo from "../assets/AWS-CloudPractitioner.png";
-import AWS_Serverless from "../assets/AWS_Serverless.svg";
-import AWS_Amplify from "../assets/AWS_Amplify.svg";
-import AWS_APIGateway from "../assets/AWS_APIGateway.svg";
-import AWS_Lambda from "../assets/AWS_Lambda.svg";
-import AWS_RDS from "../assets/AWS_RDS.svg";
-import AWS_DynamoDB from "../assets/AWS_DynamoDB.svg";
-import P8RallySolution from "../assets/P8RallySolution.png";
-import MeeterSolution from "../assets/MeeterSolution.png";
-
-import mobileAppsIcon from "../assets/mobileIcon.svg";
-import websitesIcon from "../assets/websiteIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbsContainer: {

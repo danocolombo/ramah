@@ -142,7 +142,6 @@ const useStyles = makeStyles((theme) => ({
 export default function EngineeringPage(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   //   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 

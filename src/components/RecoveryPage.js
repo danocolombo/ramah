@@ -1,20 +1,15 @@
 import React from "react";
-import Lottie from "react-lottie";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonArrow from "./ui/ButtonArrow";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
-//import animationData from "../animations/landinganimation/data";
-import animationData from "../animations/developer/developer.json";
-import recoveryBackground from "../assets/repeatingBackground.svg";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -159,21 +154,6 @@ const useStyles = makeStyles((theme) => ({
 export default function LandingPage(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesLG = useMediaQuery(theme.breakpoints.down("lg"));
-  const matchesXL = useMediaQuery(theme.breakpoints.down("xl"));
-  const matchesXXL = useMediaQuery(theme.breakpoints.down("xxl"));
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
   return (
     <Grid container direction="column" className={classes.mainContainer}>

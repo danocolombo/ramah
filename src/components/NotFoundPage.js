@@ -4,8 +4,6 @@ import Lottie from "react-lottie";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-
 import NotFoundAnimation from "../animations/404pageNotFound/data.json";
 
 const useStyles = makeStyles((theme) => ({
