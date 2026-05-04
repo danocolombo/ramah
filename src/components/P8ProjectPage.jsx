@@ -102,7 +102,7 @@ export default function Example1() {
           <Typography variant="body1">
             And the next thing you know,
             <br />
-            you're not who you used to be...
+            {"you're not who you used to be..."}
           </Typography>
         </Box>
         <Box sx={sx.fItemRight}>GRAPHIC1</Box>
@@ -114,7 +114,7 @@ export default function Example1() {
           <Typography variant="body1">
             And the next thing you know,
             <br />
-            you're not who you used to be...
+            {"you're not who you used to be..."}
           </Typography>
         </Box>
         <Box sx={sx.flexRight}>GRAPHIC2</Box>
@@ -125,7 +125,7 @@ export default function Example1() {
           <Typography variant="body1">
             And the next thing you know,
             <br />
-            you're not who you used to be...
+            {"you're not who you used to be..."}
           </Typography>
         </Box>
         <Box sx={sx.flexRight}>GRAPHIC3</Box>
@@ -154,7 +154,7 @@ export default function Example1() {
           <Typography variant="body1">
             And the next thing you know,
             <br />
-            you're not who you used to be...
+            {"you're not who you used to be..."}
           </Typography>
         </Grid>
         <Grid item sm={12} lg={6} sx={sx.areaRight}>
@@ -164,7 +164,7 @@ export default function Example1() {
           <Typography variant="body1">
             And the next thing you know,
             <br />
-            you're not who you used to be...
+            {"you're not who you used to be..."}
           </Typography>
         </Grid>
         <Grid item sm={12} lg={6} sx={sx.areaRight}>

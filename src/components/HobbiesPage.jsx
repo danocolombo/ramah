@@ -207,6 +207,7 @@ function getHobbiesPageSx(theme) {
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
+    void expand;
     return <IconButton {...other} />;
 })(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -216,7 +217,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function HobbiesPage(props) {
+export default function HobbiesPage() {
     const [expanded, setExpanded] = React.useState(false);
     const theme = useTheme();
   const sx = useMemo(() => getHobbiesPageSx(theme), [theme]);
@@ -349,7 +350,7 @@ export default function HobbiesPage(props) {
             {/* RECIPES */}
             <Grid sx={sx.recipeContainer}>
                 {recipes.map((recipe) => (
-                    <Card sx={sx.recipeCard}>
+                    <Card key={recipe.title} sx={sx.recipeCard}>
                         <CardHeader
                             avatar={
                                 <Avatar

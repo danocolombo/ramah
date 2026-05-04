@@ -145,7 +145,7 @@ function getCustomSoftwarePageSx(theme) {
 
 
 
-export default function CustomSoftwarePage(props) {
+export default function CustomSoftwarePage() {
   const theme = useTheme();
   const sx = useMemo(() => getCustomSoftwarePageSx(theme), [theme]);
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
@@ -222,7 +222,7 @@ export default function CustomSoftwarePage(props) {
         <Box sx={sx.paragraphOne}>
           <Typography>
             Over the years I have been task with working with one software
-            solution for managing a client's meetings. It was custom software,
+            solution for managing a client&apos;s meetings. It was custom software,
             originally written in PHP with a MySQL database backend.
           </Typography>
         </Box>

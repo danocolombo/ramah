@@ -180,7 +180,7 @@ function getAWSPageSx(theme) {
 
 
 
-export default function AWSPage(props) {
+export default function AWSPage() {
     const theme = useTheme();
   const sx = useMemo(() => getAWSPageSx(theme), [theme]);
 

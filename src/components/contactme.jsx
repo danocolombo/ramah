@@ -98,7 +98,7 @@ function getcontactmeSx(theme) {
 
 
 
-export default function Contact(props) {
+export default function Contact() {
   const theme = useTheme();
   const sx = useMemo(() => getcontactmeSx(theme), [theme]);
 

@@ -23,7 +23,7 @@ function getNotFoundSx(theme) {
   };
 }
 
-export default function NotFoundPage(props) {
+export default function NotFoundPage() {
   const theme = useTheme();
   const sx = useMemo(() => getNotFoundSx(theme), [theme]);
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));

@@ -82,7 +82,7 @@ export default function KitchenDisplay(props) {
             <Typography variant="h2" sx={sx.kitchenText}>
               We have to eat...
               <br />
-              we don't have to be bored.
+              we don&apos;t have to be bored.
             </Typography>
             {matchesMD ? null : (
               <Typography variant="h1" sx={sx.supportText}>

@@ -157,7 +157,7 @@ function getRecoveryPageSx(theme) {
 
 
 
-export default function RecoveryPage(props) {
+export default function RecoveryPage() {
   const theme = useTheme();
   const sx = useMemo(() => getRecoveryPageSx(theme), [theme]);
 
@@ -250,8 +250,8 @@ export default function RecoveryPage(props) {
             habits and hang-ups on my own with a goal of just getting by.
             <br />
             <br />
-            Contact me if you want some more information, or click the "Find a
-            Group" link below.
+            Contact me if you want some more information, or click the &quot;Find a
+            Group&quot; link below.
           </Typography>
         </Box>
       

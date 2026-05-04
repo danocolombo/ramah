@@ -84,7 +84,7 @@ function getEnterpriseSx(theme) {
   };
 }
 
-export default function EnterprisePage(props) {
+export default function EnterprisePage() {
   const theme = useTheme();
   const sx = useMemo(() => getEnterpriseSx(theme), [theme]);
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));

@@ -224,16 +224,15 @@ export default function LandingPage(props) {
         <Box sx={sx.introWrapper}>
           <Typography variant="h4" sx={sx.introductionParagraph}>
             to contribute to something that makes a real difference in other
-            people's lives
+            people&apos;s lives
           </Typography>
-          <div align="center">
+          <Box sx={{ textAlign: "center" }}>
             <Box sx={sx.buttonContainer}>
               <Button
                 component={Link}
                 to="/engineering"
                 sx={sx.engineeringButton}
                 variant="outlined"
-                align="center"
                 onClick={() => props.setValue(2)}
               >
                 <span style={{ marginRight: 10 }}>Difference</span>
@@ -244,7 +243,7 @@ export default function LandingPage(props) {
                 />
               </Button>
             </Box>
-          </div>
+          </Box>
         </Box>
       </Box>
 

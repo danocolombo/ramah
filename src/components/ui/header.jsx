@@ -150,7 +150,7 @@ export default function Header(props) {
     props.setSelectedIndex(i);
   };
 
-  const handleClose = (e) => {
+  const handleClose = () => {
     setAnchorEl(null);
     setOpenMenu(false);
   };

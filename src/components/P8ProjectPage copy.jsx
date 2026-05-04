@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function P8Rally(props) {
+export default function P8Rally() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
