@@ -45,8 +45,11 @@ jobs:
         with:
           languages: javascript-typescript
           config-file: ./.github/codeql/codeql-config.yml
-          # https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages#using-query-packs
+          # Query suites: https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages#using-query-packs
           queries: security-and-quality
+          # Pack format `scope/name` — leading `+` merges with packs from config-file (if any).
+          # https://github.com/github/codeql-action/blob/main/init/action.yml
+          packs: +codeql/javascript-all
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3

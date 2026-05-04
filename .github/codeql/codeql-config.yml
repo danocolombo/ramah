@@ -17,7 +17,7 @@ paths-ignore:
   - dist
   - coverage
 
-# Query suite `security-and-quality` is enabled in `.github/workflows/codeql.yml` (init `queries`).
+# Query suite `security-and-quality` and pack `codeql/javascript-all` are enabled in `.github/workflows/codeql.yml` (`queries` / `packs`).
 # Do not duplicate it here, or those queries may run twice. To move suite selection into this file instead, use:
 # queries:
 #   - uses: security-and-quality
