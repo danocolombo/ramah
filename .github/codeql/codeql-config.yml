@@ -17,9 +17,8 @@ paths-ignore:
   - dist
   - coverage
 
-# Optional: extra query suites (more findings, longer CI). Uncomment one block as needed.
-# queries:
-#   - uses: security-extended
+# Query suite `security-and-quality` is enabled in `.github/workflows/codeql.yml` (init `queries`).
+# Do not duplicate it here, or those queries may run twice. To move suite selection into this file instead, use:
 # queries:
 #   - uses: security-and-quality
 
