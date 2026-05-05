@@ -1,0 +1,15 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/e4ec9b14-33fd-43da-ab74-6bef517ddd08/resourceGroups/Rama_group/providers/Microsoft.Web/sites/Rama",
+    "appService.deploySubpath": "",
+    "cSpell.words": [
+        "contactme",
+        "customsoftware",
+        "Ramah",
+        "subheadline",
+        "woodshop"
+    ]
+}

@@ -2,13 +2,11 @@ import React, { useEffect, useMemo } from 'react';
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import { useMediaQuery } from '@mui/material';
 
-import ButtonArrow from './ui/ButtonArrow';
+import FeatureCard from './ui/FeatureCard';
 import engineeringPic from '../assets/computer_glasses.jpg';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import AWSLogo from '../assets/AWS_Logo.svg';
@@ -100,36 +98,6 @@ function getEngineeringPageSx(theme) {
     quoted: {
         fontStyle: 'italic',
     },
-    learnMoreButton: {
-        ...theme.typography.learnButton,
-        fontSize: '0.7rem',
-        height: 35,
-        padding: 5,
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '2em',
-        },
-    },
-    learnButton: {
-        ...theme.typography.learnButton,
-        fontSize: '0.7rem',
-        height: 35,
-        padding: 5,
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: '2em',
-        },
-    },
-    icon: {
-        marginLeft: '2em',
-        [theme.breakpoints.down('xs')]: {
-            marginLeft: 0,
-        },
-    },
-    gridItemB2: {},
-    specialText: {
-        fontFamily: 'Pacifico',
-        color: theme.palette.common.orange,
-    },
-
   };
 }
 
@@ -139,7 +107,6 @@ export default function EngineeringPage(props) {
     const theme = useTheme();
   const sx = useMemo(() => getEngineeringPageSx(theme), [theme]);
 
-    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -179,96 +146,43 @@ export default function EngineeringPage(props) {
                 </Box>
             </Box>
             {/** //   SECTION 2 */}
-            <Typography sx={sx.sectionTitle}>
-                AWS Cloud Technology
-            </Typography>
-            <Box sx={sx.flexContainer}>
-                <Box sx={sx.flexLeft}>
-                    <Typography sx={sx.sectionText}>
-                        Leader in Cloud Technology. Experience through the
-                        stack.
-                    </Typography>
-                    <Typography sx={sx.sectionText}>
-                        Design, architecture, development and delivery.
-                        {matchesSM ? null : <br />}Not just training.
-                    </Typography>
-                    <Button
-                        component={Link}
-                        href='/aws'
-                        to='/aws'
-                        variant='outlined'
-                        sx={sx.learnMoreButton}
-                        onClick={() => {
-                            props.setValue(1);
-                            props.setSelectedIndex(2);
-                        }}
-                    >
-                        <span style={{ marginRight: 10 }}>Learn More</span>
-                        {/* <span>Learn More</span> */}
-                        <ButtonArrow
-                            width={10}
-                            height={10}
-                            fill={theme.palette.common.blue}
-                        />
-                    </Button>
-                </Box>
-                <Box sx={sx.flexRight}>
-                    {/* {matchesMD ? null : ( */}
-                    <Grid item sx={sx.gridItemB2}>
-                        <Box component="img"
-                            sx={sx.icon}
-                            alt='mobile phone icon'
-                            src={AWSLogo}
-                            width='250em'
-                        />
-                    </Grid>
-                    {/* )} */}
-                </Box>
-            </Box>
+            <FeatureCard
+                title="AWS Cloud Technology"
+                body={[
+                    'Leader in Cloud Technology. Experience through the stack.',
+                    'Design, architecture, development and delivery. Not just training.',
+                ]}
+                icon={AWSLogo}
+                iconAlt="AWS logo"
+                linkTo="/aws"
+                onNavigate={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(2);
+                }}
+            />
             {/** //   SECTION 3 */}
-            <Typography sx={sx.sectionTitle}>
-                Custom Software
-            </Typography>
-            <Box sx={sx.flexContainer}>
-                <Box sx={sx.flexLeft}>
-                    <Typography sx={sx.sectionText}>
-                        Save Energy. {matchesSM ? null : <br />}Save Time.{' '}
-                        {matchesSM ? null : <br />}Save Money.
-                    </Typography>
-                    <Typography sx={sx.sectionText}>
+            <FeatureCard
+                title="Custom Software"
+                body={[
+                    'Save Energy. Save Time. Save Money.',
+                    <>
                         Complete digital solutions, from investigation to{' '}
-                        <Box component="span" sx={sx.specialText}>
+                        <Box
+                            component="span"
+                            sx={{ fontFamily: 'Pacifico', color: theme.palette.common.orange }}
+                        >
                             celebration.
                         </Box>
-                    </Typography>
-                    <Button
-                        component={Link}
-                        to='/customsoftware'
-                        href='/customsoftware'
-                        variant='outlined'
-                        sx={sx.learnButton}
-                        onClick={() => {
-                            props.setValue(1);
-                            props.setSelectedIndex(1);
-                        }}
-                    >
-                        <span style={{ marginRight: 10 }}>Learn More</span>
-                        <ButtonArrow
-                            width={10}
-                            height={10}
-                            fill={theme.palette.common.blue}
-                        />
-                    </Button>
-                </Box>
-                <Box sx={sx.flexRight}>
-                    <Box component="img"
-                        sx={sx.icon}
-                        alt='custom software icon'
-                        src={customSoftwareIcon}
-                        width='250em'
-                    />
-                </Box>
-            </Box>
+                    </>,
+                ]}
+                icon={customSoftwareIcon}
+                iconAlt="custom software icon"
+                linkTo="/customsoftware"
+                onNavigate={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(1);
+                }}
+            />
         </Box>
     );
 }

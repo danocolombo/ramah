@@ -6,8 +6,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ButtonArrow from "../components/ui/ButtonArrow";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import FeatureCard from "../components/ui/FeatureCard";
 // import mobileBackground from "../assets/aci-terzza-sunset-mobile.png";
 // import background from "../assets/aci-terzza-sunset.jpg";
 import background from "../assets/creativeInspiration.jpg";
@@ -87,20 +86,6 @@ function getLandingPageSx(theme) {
     alignItems: "center",
     justify: "center",
   },
-  recoveryCard: {
-    position: "absolute",
-    boxShadow: theme.shadows[10],
-    borderRadius: 15,
-    padding: "1em",
-    [theme.breakpoints.down("md")]: {
-      paddingTop: "1em",
-      paddingBottom: "1em",
-      paddingLeft: 0,
-      paddingRight: 0,
-      borderRadius: 0,
-      width: "100%",
-    },
-  },
   recoveryBackground: {
     backgroundImage: `url(${recoveryBackground})`,
     backgroundPosition: "center",
@@ -108,9 +93,6 @@ function getLandingPageSx(theme) {
     backgroundRepeat: "no-repeat",
     height: "100%",
     width: "100%",
-  },
-  recoveryQutote: {
-    marginBottom: "1em",
   },
   estimateButton: {
     ...theme.typography.estimate,
@@ -145,13 +127,6 @@ function getLandingPageSx(theme) {
     fontSize: "0.9rem",
     height: 45,
     width: 145,
-  },
-  learnButtonRecovery: {
-    ...theme.typography.learnButton,
-    fontSize: "0.9rem",
-    height: 45,
-    width: 145,
-    topMargin: "5em",
   },
   learnButton: {
     ...theme.typography.learnButton,
@@ -256,46 +231,13 @@ export default function LandingPage(props) {
           justifyContent="center"
           sx={sx.recoveryContainer}
         >
-          <Card sx={sx.recoveryCard}>
-            <CardContent>
-              <Grid
-                container
-                direction="column"
-                style={{ textAlign: "center" }}
-              >
-                <Grid item>
-                  <Typography variant="h3" gutterBottom>
-                    Recovery Advocate
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    variant="subtitle1"
-                    sx={sx.recoveryQutote}
-                  >
-                    I understood myself only after I destroyed myself; and only
-                    <br />
-                    in the process of healing, have I come to know who I really
-                    am.
-                  </Typography>
-                  <Button
-                    component={Link}
-                    to="/recovery"
-                    sx={sx.learnButtonRecovery}
-                    variant="outlined"
-                    onClick={() => props.setValue(2)}
-                  >
-                    <span style={{ marginRight: 10 }}>Learn More</span>
-                    <ButtonArrow
-                      width={15}
-                      height={15}
-                      fill={theme.palette.common.blue}
-                    />
-                  </Button>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+          <FeatureCard
+            variant="card"
+            title="Recovery Advocate"
+            body="I understood myself only after I destroyed myself; and only in the process of healing, have I come to know who I really am."
+            linkTo="/recovery"
+            onNavigate={() => props.setValue(2)}
+          />
           <Box sx={sx.recoveryBackground} />
         </Grid>
       </Grid>
