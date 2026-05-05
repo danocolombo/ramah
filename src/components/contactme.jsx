@@ -148,8 +148,7 @@ export default function Contact() {
     }
   };
   const onConfirm = () => {
-    const to =
-      import.meta.env.VITE_CONTACT_EMAIL || "dano.colombo@gmail.com";
+    const to = import.meta.env.VITE_CONTACT_EMAIL || "danocolombo@gmail.com";
     const subject = encodeURIComponent("DColombo.com Web Site Message");
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`

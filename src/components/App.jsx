@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import Header from './ui/header';
 import Footer from './ui/footer';
 import theme from './ui/theme';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import EngineeringPage from './EngineeringPage';
-import CustomSoftwarePage from './CustomSoftwarePage';
-import EnterprisePage from './EnterprisePage';
-import RecoveryPage from './RecoveryPage';
-import HobbiesPage from './HobbiesPage';
-import AWS from './AWSPage';
-import Contact from './contactme';
-import NotFoundPage from './NotFoundPage';
-import P8Rally from './P8ProjectPage';
+
+const LandingPage = lazy(() => import('./LandingPage'));
+const EngineeringPage = lazy(() => import('./EngineeringPage'));
+const CustomSoftwarePage = lazy(() => import('./CustomSoftwarePage'));
+const EnterprisePage = lazy(() => import('./EnterprisePage'));
+const RecoveryPage = lazy(() => import('./RecoveryPage'));
+const HobbiesPage = lazy(() => import('./HobbiesPage'));
+const AWS = lazy(() => import('./AWSPage'));
+const Contact = lazy(() => import('./contactme'));
+const NotFoundPage = lazy(() => import('./NotFoundPage'));
+const P8Rally = lazy(() => import('./P8ProjectPage'));
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -27,98 +28,93 @@ function App() {
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
         />
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <LandingPage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/p8RallyProject'
-            element={
-              <P8Rally
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/customsoftware'
-            element={
-              <CustomSoftwarePage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/engineering'
-            element={
-              <EngineeringPage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/enterprise'
-            element={
-              <EnterprisePage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/recovery'
-            element={
-              <RecoveryPage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/hobbies'
-            element={
-              <HobbiesPage
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/aws'
-            element={
-              <AWS
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/contact'
-            element={
-              <Contact
-                setValue={setValue}
-                setSelectedIndex={setSelectedIndex}
-              />
-            }
-          />
-          <Route
-            path='/integrations'
-            element={<div>Integrations</div>}
-          />
-          <Route path='/cr' element={<div>Celebrate Recovery</div>} />
-          <Route path='/woodshop' element={<div>Woodshop</div>} />
-          <Route path='/kitchen' element={<div>Kitchen</div>} />
-          <Route path='/404' element={<NotFoundPage />} />
-          <Route path='*' element={<Navigate to='/404' replace />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <LandingPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/p8RallyProject'
+              element={
+                <P8Rally
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/customsoftware'
+              element={
+                <CustomSoftwarePage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/engineering'
+              element={
+                <EngineeringPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/enterprise'
+              element={
+                <EnterprisePage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/recovery'
+              element={
+                <RecoveryPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/hobbies'
+              element={
+                <HobbiesPage
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/aws'
+              element={
+                <AWS
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route
+              path='/contact'
+              element={
+                <Contact
+                  setValue={setValue}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              }
+            />
+            <Route path='/notfound' element={<NotFoundPage />} />
+            <Route path='*' element={<Navigate to='/notfound' />} />
+          </Routes>
+        </Suspense>
         <Footer
           value={value}
           setValue={setValue}
