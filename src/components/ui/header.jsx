@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,7 +15,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 import logo from '../../assets/dcLogo.png';
-import HeaderMenu from './HeaderMenu';
+import HeaderMenu2 from './HeaderMenu2';
 
 const ToolbarMargin = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
@@ -63,61 +61,12 @@ function ElevationScroll(props) {
     });
 }
 
-const MENU_OPTIONS = [
-    {
-        name: 'Engineering',
-        link: '/engineering',
-        activeIndex: 1,
-        selectedIndex: 0,
-    },
-    {
-        name: 'AWS Cloud',
-        link: '/aws',
-        activeIndex: 1,
-        selectedIndex: 1,
-    },
-    {
-        name: 'Custom Software',
-        link: '/customsoftware',
-        activeIndex: 1,
-        selectedIndex: 2,
-    },
-    {
-        name: 'Enterprise',
-        link: '/enterprise',
-        activeIndex: 1,
-        selectedIndex: 3,
-    },
-];
-
 export default function Header(props) {
     const theme = useTheme();
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
     const [openDrawer, setOpenDrawer] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [openMenu, setOpenMenu] = useState(false);
-
-    const tabSx = useMemo(
-        () => ({
-            ...theme.typography.tab,
-            minWidth: 10,
-            marginLeft: '25px',
-        }),
-        [theme],
-    );
-
-    const menuItemSx = useMemo(
-        () => ({
-            ...theme.typography.tab,
-            opacity: 0.7,
-            '&:hover': {
-                opacity: 1,
-            },
-        }),
-        [theme],
-    );
 
     const drawerItemSx = useMemo(
         () => ({
@@ -139,56 +88,33 @@ export default function Header(props) {
         [],
     );
 
-    const handleChange = (e, newValue) => {
-        props.setValue(newValue);
-    };
-
-    const handleClick = useCallback((e) => {
-        setAnchorEl(e.currentTarget);
-        setOpenMenu(true);
-    }, []);
-
-    const handleMenuItemClick = (i) => {
-        setAnchorEl(null);
-        setOpenMenu(false);
-        props.setSelectedIndex(i);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-        setOpenMenu(false);
-    };
-
     const routes = useMemo(
         () => [
             { name: 'Home', link: '/', activeIndex: 0 },
-            {
-                name: 'Engineering',
-                link: '/engineering',
-                activeIndex: 1,
-                ariaOwns: anchorEl ? 'simple-menu' : undefined,
-                ariaPopup: anchorEl ? 'true' : undefined,
-                mouseOver: (event) => handleClick(event),
-            },
             { name: 'Recovery', link: '/recovery', activeIndex: 2 },
             { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
-            { name: 'Contact Me', link: '/contact', activeIndex: 4 },
+            { name: 'Engineering', link: '/engineering', activeIndex: 1 },
+            { name: 'About Me', link: '/contact', activeIndex: 4 },
         ],
-        [anchorEl, handleClick],
+        [],
+    );
+
+    const desktopMenuItems = useMemo(
+        () => [
+            { name: 'Recovery', link: '/recovery', activeIndex: 2 },
+            { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
+            { name: 'Engineering', link: '/engineering', activeIndex: 1 },
+            { name: 'About Me', link: '/contact', activeIndex: 4 },
+        ],
+        [],
     );
 
     useEffect(() => {
-        [...MENU_OPTIONS, ...routes].forEach((route) => {
+        routes.forEach((route) => {
             switch (window.location.pathname) {
                 case `${route.link}`:
                     if (props.value !== route.activeIndex) {
                         props.setValue(route.activeIndex);
-                        if (
-                            route.selectedIndex &&
-                            route.selectedIndex !== props.selectedIndex
-                        ) {
-                            props.setSelectedIndex(route.selectedIndex);
-                        }
                     }
                     break;
                 case '/estimate':
@@ -198,42 +124,23 @@ export default function Header(props) {
                     break;
             }
         });
-    }, [props.value, props.selectedIndex, routes, props]);
+    }, [props.value, routes, props]);
 
-    const tabs = (
-        <React.Fragment>
-            <Tabs
-                value={props.value}
-                onChange={handleChange}
-                sx={{ marginLeft: 'auto' }}
-                indicatorColor='primary'
-            >
-                {routes.map((route, index) => (
-                    <Tab
-                        key={`${route}${index}`}
-                        sx={tabSx}
-                        component={Link}
-                        to={route.link}
-                        label={route.name}
-                        aria-owns={route.ariaOwns}
-                        aria-haspopup={route.ariaPopup}
-                        onMouseOver={route.mouseOver}
-                    />
-                ))}
-            </Tabs>
-            <HeaderMenu
-                anchorEl={anchorEl}
-                backgroundColor={theme.palette.common.blue}
-                menuItemSx={menuItemSx}
-                menuOptions={MENU_OPTIONS}
-                onClose={handleClose}
-                onSelect={handleMenuItemClick}
-                open={openMenu}
-                selectedIndex={props.selectedIndex}
-                setValue={props.setValue}
-                value={props.value}
-            />
-        </React.Fragment>
+    const desktopMenu = (
+        <HeaderMenu2
+            items={desktopMenuItems}
+            onSelect={props.setValue}
+            selectedValue={props.value}
+            textColor={theme.palette.secondary.main}
+        />
+    );
+
+    const drawerRoutes = useMemo(
+        () => [
+            { name: 'Home', link: '/', activeIndex: 0 },
+            ...desktopMenuItems,
+        ],
+        [desktopMenuItems],
     );
 
     const drawer = (
@@ -250,9 +157,9 @@ export default function Header(props) {
             >
                 <ToolbarMargin />
                 <List disablePadding>
-                    {routes.map((route) => (
+                    {drawerRoutes.map((route) => (
                         <ListItem
-                            key={`${route}${route.activeIndex}`}
+                            key={`${route.link}${route.activeIndex}`}
                             disablePadding
                             divider
                         >
@@ -317,7 +224,7 @@ export default function Header(props) {
                         >
                             <LogoImage alt='company logo' src={logo} />
                         </LogoLinkButton>
-                        {matches ? drawer : tabs}
+                        {matches ? drawer : desktopMenu}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
