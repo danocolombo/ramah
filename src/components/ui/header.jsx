@@ -7,8 +7,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import IconButton from '@mui/material/IconButton';
@@ -19,6 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 import logo from '../../assets/dcLogo.png';
+import HeaderMenu from './HeaderMenu';
 
 const ToolbarMargin = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
@@ -149,7 +148,7 @@ export default function Header(props) {
         setOpenMenu(true);
     }, []);
 
-    const handleMenuItemClick = (e, i) => {
+    const handleMenuItemClick = (i) => {
         setAnchorEl(null);
         setOpenMenu(false);
         props.setSelectedIndex(i);
@@ -222,44 +221,18 @@ export default function Header(props) {
                     />
                 ))}
             </Tabs>
-            <Menu
-                id='simple-menu'
+            <HeaderMenu
                 anchorEl={anchorEl}
-                open={openMenu}
+                backgroundColor={theme.palette.common.blue}
+                menuItemSx={menuItemSx}
+                menuOptions={MENU_OPTIONS}
                 onClose={handleClose}
-                PaperProps={{
-                    sx: {
-                        backgroundColor: theme.palette.common.blue,
-                        color: 'white',
-                        borderRadius: 0,
-                    },
-                }}
-                MenuListProps={{
-                    onMouseLeave: handleClose,
-                }}
-                elevation={0}
-                style={{ zIndex: 1302 }}
-                keepMounted
-            >
-                {MENU_OPTIONS.map((option, i) => (
-                    <MenuItem
-                        key={`${option}${i}`}
-                        component={Link}
-                        to={option.link}
-                        sx={menuItemSx}
-                        onClick={(event) => {
-                            handleMenuItemClick(event, i);
-                            props.setValue(1);
-                            handleClose();
-                        }}
-                        selected={
-                            i === props.selectedIndex && props.value === 1
-                        }
-                    >
-                        {option.name}
-                    </MenuItem>
-                ))}
-            </Menu>
+                onSelect={handleMenuItemClick}
+                open={openMenu}
+                selectedIndex={props.selectedIndex}
+                setValue={props.setValue}
+                value={props.value}
+            />
         </React.Fragment>
     );
 
