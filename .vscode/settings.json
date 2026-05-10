@@ -11,5 +11,6 @@
         "Ramah",
         "subheadline",
         "woodshop"
-    ]
+    ],
+    "postman.settings.dotenv-detection-notification-visibility": false
 }
