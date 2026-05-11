@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/dcLogo.png';
-import HeaderMenu2 from './HeaderMenu2';
+import HeaderMenu from './HeaderMenu';
 
 const ToolbarMargin = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
@@ -62,6 +62,13 @@ export default function Header(props) {
             { name: 'Recovery', link: '/recovery', activeIndex: 2 },
             { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
             { name: 'Engineering', link: '/engineering', activeIndex: 1 },
+            { name: 'AWS Cloud', link: '/aws', activeIndex: 1 },
+            {
+                name: 'Custom Software',
+                link: '/customsoftware',
+                activeIndex: 1,
+            },
+            { name: 'Enterprise', link: '/enterprise', activeIndex: 1 },
             { name: 'About Me', link: '/contact', activeIndex: 4 },
         ],
         [],
@@ -71,7 +78,25 @@ export default function Header(props) {
         () => [
             { name: 'Recovery', link: '/recovery', activeIndex: 2 },
             { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
-            { name: 'Engineering', link: '/engineering', activeIndex: 1 },
+            {
+                name: 'Engineering',
+                link: '/engineering',
+                activeIndex: 1,
+                subItems: [
+                    {
+                        name: 'Engineering',
+                        link: '/engineering',
+                        activeIndex: 1,
+                    },
+                    { name: 'AWS Cloud', link: '/aws', activeIndex: 1 },
+                    {
+                        name: 'Custom Software',
+                        link: '/customsoftware',
+                        activeIndex: 1,
+                    },
+                    { name: 'Enterprise', link: '/enterprise', activeIndex: 1 },
+                ],
+            },
             { name: 'About Me', link: '/contact', activeIndex: 4 },
         ],
         [],
@@ -95,7 +120,7 @@ export default function Header(props) {
     }, [props.value, routes, props]);
 
     const desktopMenu = (
-        <HeaderMenu2
+        <HeaderMenu
             items={desktopMenuItems}
             onSelect={props.setValue}
             selectedValue={props.value}
