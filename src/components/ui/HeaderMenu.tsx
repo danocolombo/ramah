@@ -108,6 +108,7 @@ export default function HeaderMenu({
         return (
             <React.Fragment>
                 <SwipeableDrawer
+                    anchor='right'
                     disableBackdropTransition={!iOS}
                     disableDiscovery={iOS}
                     open={openDrawer}

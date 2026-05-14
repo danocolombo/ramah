@@ -7,8 +7,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 const LandingPage = lazy(() => import('./LandingPage'));
 const EngineeringPage = lazy(() => import('./EngineeringPage'));
-const CustomSoftwarePage = lazy(() => import('./CustomSoftwarePage'));
-const EnterprisePage = lazy(() => import('./EnterprisePage'));
 const RecoveryPage = lazy(() => import('./RecoveryPage'));
 const HobbiesPage = lazy(() => import('./HobbiesPage'));
 const AWS = lazy(() => import('./AWSPage'));
@@ -50,12 +48,7 @@ function App() {
                         />
                         <Route
                             path='/customsoftware'
-                            element={
-                                <CustomSoftwarePage
-                                    setValue={setValue}
-                                    setSelectedIndex={setSelectedIndex}
-                                />
-                            }
+                            element={<Navigate to='/engineering' replace />}
                         />
                         <Route
                             path='/engineering'
@@ -68,12 +61,7 @@ function App() {
                         />
                         <Route
                             path='/enterprise'
-                            element={
-                                <EnterprisePage
-                                    setValue={setValue}
-                                    setSelectedIndex={setSelectedIndex}
-                                />
-                            }
+                            element={<Navigate to='/engineering' replace />}
                         />
                         <Route
                             path='/recovery'

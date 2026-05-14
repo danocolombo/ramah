@@ -59,16 +59,10 @@ export default function Header(props) {
     const routes = useMemo(
         () => [
             { name: 'Home', link: '/', activeIndex: 0 },
+            { name: 'Tech', link: '/engineering', activeIndex: 1 },
+            { name: 'AWS Cloud', link: '/aws', activeIndex: 1 },
             { name: 'Recovery', link: '/recovery', activeIndex: 2 },
             { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
-            { name: 'Engineering', link: '/engineering', activeIndex: 1 },
-            { name: 'AWS Cloud', link: '/aws', activeIndex: 1 },
-            {
-                name: 'Custom Software',
-                link: '/customsoftware',
-                activeIndex: 1,
-            },
-            { name: 'Enterprise', link: '/enterprise', activeIndex: 1 },
             { name: 'About Me', link: '/contact', activeIndex: 4 },
         ],
         [],
@@ -76,27 +70,21 @@ export default function Header(props) {
 
     const desktopMenuItems = useMemo(
         () => [
-            { name: 'Recovery', link: '/recovery', activeIndex: 2 },
-            { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
             {
-                name: 'Engineering',
+                name: 'Tech',
                 link: '/engineering',
                 activeIndex: 1,
                 subItems: [
                     {
-                        name: 'Engineering',
+                        name: 'Software Engineering',
                         link: '/engineering',
                         activeIndex: 1,
                     },
                     { name: 'AWS Cloud', link: '/aws', activeIndex: 1 },
-                    {
-                        name: 'Custom Software',
-                        link: '/customsoftware',
-                        activeIndex: 1,
-                    },
-                    { name: 'Enterprise', link: '/enterprise', activeIndex: 1 },
                 ],
             },
+            { name: 'Recovery', link: '/recovery', activeIndex: 2 },
+            { name: 'Hobbies', link: '/hobbies', activeIndex: 3 },
             { name: 'About Me', link: '/contact', activeIndex: 4 },
         ],
         [],
@@ -131,10 +119,7 @@ export default function Header(props) {
     return (
         <React.Fragment>
             <ElevationScroll>
-                <AppBar
-                    position='fixed'
-                    sx={{ zIndex: theme.zIndex.modal + 1 }}
-                >
+                <AppBar position='fixed' sx={{ zIndex: theme.zIndex.appBar }}>
                     <Toolbar disableGutters>
                         <LogoLinkButton
                             component={Link}
