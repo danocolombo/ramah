@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useMemo, useState } from "react";
+import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
+import emailjs from "@emailjs/browser";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -21,14 +22,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import emailIcon from "../assets/email.svg";
 import paperAirplane from "../assets/send.svg";
 
-const INQUIRY_TYPES = [
-  "General Inquiry",
-  "Software Development",
-  "AWS / Cloud",
-  "Project Collaboration",
-  "Recovery Inquiry",
-  "Suggestion/Feedback",
-  "Other",
+const INQUIRY_TYPES: { label: string; value: string }[] = [
+  { label: "General Inquiry",       value: "General Inquiry" },
+  { label: "Software Development",  value: "Software Development" },
+  { label: "AWS / Cloud",           value: "AWS Cloud" },
+  { label: "Project Collaboration", value: "Project Collaboration" },
+  { label: "Recovery Inquiry",      value: "Recovery Inquiry" },
+  { label: "Suggestion / Feedback", value: "Suggestion Feedback" },
+  { label: "Other",                 value: "Other" },
 ];
 
 interface FormState {
@@ -52,6 +53,12 @@ const initialForm: FormState = {
   message: "",
 };
 
+function newChallenge() {
+  const a = Math.floor(Math.random() * 9) + 1;
+  const b = Math.floor(Math.random() * 9) + 1;
+  return { a, b, answer: a + b };
+}
+
 export default function Contact() {
   const theme = useTheme();
   // Matches the same breakpoint used by HeaderMenu for consistent mobile behavior
@@ -59,10 +66,20 @@ export default function Contact() {
 
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({ email: "", phone: "" });
-  const [snackbar, setSnackbar] = useState({ open: false, message: "" });
+  const [sending, setSending] = useState(false);
+  const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" as "success" | "error" });
+  const [challenge, setChallenge] = useState(newChallenge);
+  const [captchaInput, setCaptchaInput] = useState("");
+
+  const refreshChallenge = useCallback(() => {
+    setChallenge(newChallenge());
+    setCaptchaInput("");
+  }, []);
 
   const contactEmail =
     (import.meta.env.VITE_CONTACT_EMAIL as string) || "danocolombo@gmail.com";
+
+  const captchaCorrect = parseInt(captchaInput, 10) === challenge.answer;
 
   const isValid = useMemo(
     () =>
@@ -70,8 +87,9 @@ export default function Contact() {
       form.email.trim().length > 0 &&
       form.message.trim().length > 0 &&
       errors.email.length === 0 &&
-      errors.phone.length === 0,
-    [form, errors]
+      errors.phone.length === 0 &&
+      captchaCorrect,
+    [form, errors, captchaCorrect]
   );
 
   const handleTextChange = (
@@ -92,7 +110,7 @@ export default function Contact() {
         setErrors((prev) => ({ ...prev, phone: "" }));
       } else {
         const valid =
-          /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+          /^(\(\d{3}\)\s?\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{10})$/.test(value);
         setErrors((prev) => ({
           ...prev,
           phone: valid ? "" : "Invalid phone number",
@@ -105,28 +123,29 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, inquiryType: e.target.value }));
   };
 
-  const handleSubmit = () => {
-    const subject = encodeURIComponent(
-      `DColombo.com — ${form.inquiryType || "General Inquiry"}`
-    );
-    const body = encodeURIComponent(
-      [
-        `Name: ${form.name}`,
-        `Email: ${form.email}`,
-        `Phone: ${form.phone || "Not provided"}`,
-        `Inquiry type: ${form.inquiryType || "General Inquiry"}`,
-        "",
-        "Message:",
-        form.message,
-      ].join("\n")
-    );
-    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    setForm(initialForm);
-    setSnackbar({
-      open: true,
-      message:
-        "Your mail app should open — send the message from there to complete.",
-    });
+  const handleSubmit = async () => {
+    setSending(true);
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          phone: form.phone || "Not provided",
+          inquiry_type: form.inquiryType || "General Inquiry",
+          message: form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string,
+      );
+      setForm(initialForm);
+      refreshChallenge();
+      setSnackbar({ open: true, message: "Message sent! I'll be in touch soon.", severity: "success" });
+    } catch {
+      setSnackbar({ open: true, message: "Send failed — please try again or email me directly.", severity: "error" });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -248,7 +267,7 @@ export default function Contact() {
                       notched
                       renderValue={(selected) =>
                         selected ? (
-                          String(selected)
+                          INQUIRY_TYPES.find((t) => t.value === selected)?.label ?? String(selected)
                         ) : (
                           <Typography
                             component="span"
@@ -259,9 +278,9 @@ export default function Contact() {
                         )
                       }
                     >
-                      {INQUIRY_TYPES.map((type) => (
-                        <MenuItem key={type} value={type}>
-                          {type}
+                      {INQUIRY_TYPES.map(({ label, value }) => (
+                        <MenuItem key={value} value={value}>
+                          {label}
                         </MenuItem>
                       ))}
                     </Select>
@@ -294,7 +313,7 @@ export default function Contact() {
                     value={form.phone}
                     onChange={handleTextChange}
                     error={errors.phone.length > 0}
-                    helperText={errors.phone || "e.g. 555-867-5309"}
+                    helperText={errors.phone || "(555) 867-5309  •  555-867-5309  •  5558675309"}
                   />
                 </Grid>
 
@@ -312,6 +331,39 @@ export default function Contact() {
                   />
                 </Grid>
 
+                {/* Math CAPTCHA */}
+                <Grid item xs={12}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      flexWrap: "wrap",
+                      p: 2,
+                      borderRadius: 2,
+                      border: `1px solid ${theme.palette.divider}`,
+                      backgroundColor: theme.palette.grey[50],
+                    }}
+                  >
+                    <Typography variant="body1" sx={{ fontWeight: 600, color: theme.palette.common.blue }}>
+                      Verify you're human:
+                    </Typography>
+                    <Typography variant="body1">
+                      What is {challenge.a} + {challenge.b}?
+                    </Typography>
+                    <TextField
+                      id="captcha"
+                      size="small"
+                      type="number"
+                      value={captchaInput}
+                      onChange={(e) => setCaptchaInput(e.target.value)}
+                      error={captchaInput.length > 0 && !captchaCorrect}
+                      helperText={captchaInput.length > 0 && !captchaCorrect ? "Incorrect" : " "}
+                      inputProps={{ min: 0, max: 99, style: { width: 60, textAlign: "center" } }}
+                    />
+                  </Box>
+                </Grid>
+
                 {/* Submit — color="primary" pulls palette.primary.main (#0000FF) + contrastText from theme */}
                 <Grid
                   item
@@ -325,14 +377,16 @@ export default function Contact() {
                   <Button
                     variant="contained"
                     color="primary"
-                    disabled={!isValid}
+                    disabled={!isValid || sending}
                     onClick={handleSubmit}
                     endIcon={
-                      <img
-                        src={paperAirplane}
-                        alt=""
-                        style={{ height: 18, marginLeft: 4 }}
-                      />
+                      !sending && (
+                        <img
+                          src={paperAirplane}
+                          alt=""
+                          style={{ height: 18, marginLeft: 4 }}
+                        />
+                      )
                     }
                     sx={{
                       ...theme.typography.tab, // Raleway 700, textTransform none
@@ -345,7 +399,7 @@ export default function Contact() {
                       },
                     }}
                   >
-                    Send Message
+                    {sending ? "Sending…" : "Send Message"}
                   </Button>
                 </Grid>
               </Grid>
@@ -363,7 +417,7 @@ export default function Contact() {
       >
         <Alert
           onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
-          severity="success"
+          severity={snackbar.severity}
           variant="filled"
           sx={{ width: "100%" }}
         >
