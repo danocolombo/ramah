@@ -1,13 +1,27 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import FooterLink from './FooterLink';
 import footerAdornment from '../../assets/FooterGraphic.svg';
 import linkedIn from '../../assets/LinkedInLogo.png';
+
+const HOME_LINK = { label: 'Home', to: '/' };
+
+function buildNavLinks(setValue, setSelectedIndex) {
+    return [
+        { label: 'Engineering', to: '/engineering', onClick: () => { setValue(1); setSelectedIndex(0); } },
+        { label: 'Amazon Web Services', to: '/aws', onClick: () => { setValue(1); setSelectedIndex(1); } },
+        { label: 'Recovery', to: '/recovery', onClick: () => setValue(2) },
+        { label: 'Hobbies', to: '/hobbies', onClick: () => setValue(3) },
+        { label: 'Woodshop', to: '/woodshop', onClick: () => setValue(3) },
+        { label: 'Kitchen & Grill', to: '/kitchen', onClick: () => setValue(3) },
+        { label: 'Contact Me', to: '/contact', onClick: () => setValue(4) },
+    ];
+}
 
 function getFooterSx(theme) {
     return {
@@ -30,15 +44,21 @@ function getFooterSx(theme) {
                 width: '15em',
             },
         },
-        mainContainer: {
+        navContainer: {
             position: 'absolute',
+            width: '100%',
+            boxSizing: 'border-box',
+            display: 'flex',
+            alignItems: 'flex-start',
+            padding: '1.5em 2em',
         },
-        link: {
-            color: 'white',
-            fontFamily: 'Arial',
-            fontSize: '0.75rem',
-            fontWeight: 'bold',
-            textDecoration: 'none',
+        navRight: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-start',
+            gap: '1.25em',
+            flex: 1,
         },
         linkedInIcon: {
             padding: '2px',
@@ -47,9 +67,6 @@ function getFooterSx(theme) {
             [theme.breakpoints.down('xs')]: {
                 width: '2.5rem',
             },
-        },
-        gridItem: {
-            margin: '3em',
         },
         socialContainer: {
             position: 'absolute',
@@ -69,115 +86,37 @@ function getFooterSx(theme) {
     };
 }
 
-export default function Footer(props) {
+export default function Footer({ setValue, setSelectedIndex }) {
     const theme = useTheme();
     const sx = useMemo(() => getFooterSx(theme), [theme]);
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+    const navLinks = useMemo(
+        () => buildNavLinks(setValue, setSelectedIndex),
+        [setValue, setSelectedIndex]
+    );
+
     return (
         <Box component='footer' sx={sx.footer}>
-            {matchesMD ? null : (
-                <Grid container justifyContent='center' sx={sx.mainContainer}>
-                    <Grid item sx={sx.gridItem}>
-                        <Grid container direction='column' spacing={2}>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(0)}
-                                to='/'
-                                sx={sx.link}
-                            >
-                                HOME
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item sx={sx.gridItem}>
-                        <Grid container direction='column' spacing={2}>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => {
-                                    props.setValue(1);
-                                    props.setSelectedIndex(0);
-                                }}
-                                to='/engineering'
-                                sx={sx.link}
-                            >
-                                Engineering
-                            </Grid>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => {
-                                    props.setValue(1);
-                                    props.setSelectedIndex(1);
-                                }}
-                                to='/aws'
-                                sx={sx.link}
-                            >
-                                Amazon Web Services (AWS)
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item sx={sx.gridItem}>
-                        <Grid container direction='column' spacing={2}>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(2)}
-                                to='/recovery'
-                                sx={sx.link}
-                            >
-                                Recovery
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item sx={sx.gridItem}>
-                        <Grid container direction='column' spacing={2}>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(3)}
-                                to='/hobbies'
-                                sx={sx.link}
-                            >
-                                Hobbies
-                            </Grid>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(3)}
-                                to='/woodshop'
-                                sx={sx.link}
-                            >
-                                Woodshop
-                            </Grid>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(3)}
-                                to='/kitchen'
-                                sx={sx.link}
-                            >
-                                Kitchen & Grill
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item sx={sx.gridItem}>
-                        <Grid container direction='column' spacing={2}>
-                            <Grid
-                                item
-                                component={Link}
-                                onClick={() => props.setValue(4)}
-                                to='/contact'
-                                sx={sx.link}
-                            >
-                                Contact Me
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
+            {!matchesMD && (
+                <Box sx={sx.navContainer}>
+                    <FooterLink
+                        label={HOME_LINK.label}
+                        to={HOME_LINK.to}
+                        onClick={() => setValue(0)}
+                    />
+                    <Box sx={sx.navRight}>
+                        {navLinks.map((link) => (
+                            <FooterLink
+                                key={link.to}
+                                label={link.label}
+                                to={link.to}
+                                onClick={link.onClick}
+                            />
+                        ))}
+                    </Box>
+                </Box>
             )}
-            {matchesMD ? null : (
+            {!matchesMD && (
                 <Box
                     component='img'
                     alt='black decorative slash'
@@ -193,7 +132,7 @@ export default function Footer(props) {
             >
                 <Grid
                     item
-                    component={'a'}
+                    component='a'
                     href='https://www.linkedin.com/in/dcolombo/'
                     rel='noopener noreferrer'
                     target='_blank'
@@ -205,13 +144,11 @@ export default function Footer(props) {
                         sx={sx.linkedInIcon}
                     />
                 </Grid>
-                {matchesMD ? (
+                {matchesMD && (
                     <Grid item>
-                        <Typography sx={sx.email}>
-                            danocolombo@gmail.com
-                        </Typography>
+                        <Typography sx={sx.email}>danocolombo@gmail.com</Typography>
                     </Grid>
-                ) : null}
+                )}
             </Grid>
         </Box>
     );
