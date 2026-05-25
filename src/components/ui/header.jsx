@@ -22,14 +22,11 @@ const ToolbarMargin = styled('div')(({ theme }) => ({
 
 const LogoImage = styled('img')(({ theme }) => ({
     height: '8em',
+    [theme.breakpoints.down('lg')]: {
+        height: '4.5em',
+    },
     [theme.breakpoints.down('md')]: {
-        height: '5em',
-    },
-    [theme.breakpoints.down('xs')]: {
-        height: '5.5em',
-    },
-    [theme.breakpoints.down('sm')]: {
-        height: '6em',
+        height: '3.5em',
     },
 }));
 

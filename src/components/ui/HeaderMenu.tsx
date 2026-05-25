@@ -191,11 +191,17 @@ export default function HeaderMenu({
                             color: textColor,
                             height: '50px',
                             width: '50px',
-                            [theme.breakpoints.down('md')]: {
+                            [theme.breakpoints.down('lg')]: {
                                 height: '40px',
                                 width: '40px',
-                                marginRight: '1rem',
-                                marginLeft: '1rem',
+                                marginRight: '0.75rem',
+                                marginLeft: '0.5rem',
+                            },
+                            [theme.breakpoints.down('md')]: {
+                                height: '35px',
+                                width: '35px',
+                                marginRight: '0.5rem',
+                                marginLeft: '0.25rem',
                             },
                         }}
                     />

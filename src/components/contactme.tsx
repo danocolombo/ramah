@@ -183,7 +183,7 @@ export default function Contact() {
         alignItems="flex-start"
       >
         {/* ── Left panel: info + direct email link ── */}
-        <Grid item xs={12} sx={{ width: isMobile ? "100%" : 320, flexShrink: 0 }}>
+        <Grid sx={{ width: isMobile ? "100%" : 320, flexShrink: 0 }}>
           {/* h4 variant: Raleway 700, fortsonBlue, 1.75rem */}
           <Typography variant="h4" gutterBottom>
             Get in touch
@@ -226,7 +226,7 @@ export default function Contact() {
         </Grid>
 
         {/* ── Right panel: contact form ── */}
-        <Grid item xs={12} sx={{ flex: 1, width: "100%" }}>
+        <Grid sx={{ flex: 1, width: "100%" }}>
           <Card
             variant="outlined"
             sx={{
@@ -237,7 +237,7 @@ export default function Contact() {
             <CardContent sx={{ p: isMobile ? 2 : 4 }}>
               <Grid container spacing={2.5}>
                 {/* Name */}
-                <Grid item xs={12} sm={6}>
+                <Grid size={12}>
                   <TextField
                     label="Full Name *"
                     id="name"
@@ -248,11 +248,8 @@ export default function Contact() {
                   />
                 </Grid>
 
-                {/* Spacer — keeps Email aligned with Name on wide screens */}
-                <Grid item xs={0} sm={6} sx={{ display: { xs: "none", sm: "block" } }} />
-
                 {/* Inquiry type — full width so it's never squeezed, with a visible placeholder */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <FormControl fullWidth>
                     {/* InputLabel color (arcBlue) + fontSize (1rem) come from theme MuiInputLabel override */}
                     <InputLabel id="inquiry-label" shrink>
@@ -288,7 +285,7 @@ export default function Contact() {
                 </Grid>
 
                 {/* Email */}
-                <Grid item xs={12} sm={6}>
+                <Grid size={12}>
                   <TextField
                     label="Email Address *"
                     id="email"
@@ -303,7 +300,7 @@ export default function Contact() {
                 </Grid>
 
                 {/* Phone (optional) */}
-                <Grid item xs={12} sm={6}>
+                <Grid size={12}>
                   <TextField
                     label="Phone (optional)"
                     id="phone"
@@ -318,7 +315,7 @@ export default function Contact() {
                 </Grid>
 
                 {/* Message */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <TextField
                     label="Message *"
                     id="message"
@@ -332,7 +329,7 @@ export default function Contact() {
                 </Grid>
 
                 {/* Math CAPTCHA */}
-                <Grid item xs={12}>
+                <Grid size={12}>
                   <Box
                     sx={{
                       display: "flex",
