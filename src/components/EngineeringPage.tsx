@@ -195,25 +195,29 @@ function getEngineeringPageSx(theme: Theme) {
 const capabilityCards: CardItem[] = [
     {
         title: 'Modernization',
-        body: 'I help teams improve systems that are already important to the business: replacing unsupported components, improving response time, untangling data access, and moving critical workflows forward without losing continuity.',
+        body: "Aging systems don't have to be liabilities. I help organizations replace unsupported components, resolve performance bottlenecks, untangle data access layers, and advance critical workflows — without disrupting the operations that depend on them.",
     },
     {
         title: 'Custom Software Delivery',
-        body: 'From discovery through implementation, I can shape a practical solution around the way a team actually works instead of forcing the problem into a generic platform.',
+        body: 'Off-the-shelf tools solve generic problems. When the problem is specific to how your organization works, I design and deliver software built around that reality — from initial discovery through production release.',
     },
     {
         title: 'Technical Leadership',
-        body: 'I have worked across software delivery, product coordination, SCRUM leadership, client-facing planning, and enterprise execution. That means architecture decisions stay connected to delivery reality.',
+        body: "Good architecture means nothing if it can't be executed. With experience across delivery management, product coordination, SCRUM leadership, and enterprise client work, I keep technical decisions grounded in what it actually takes to ship.",
+    },
+    {
+        title: 'Operational Readiness',
+        body: 'Shipping is not the finish line. From the first design decision, I factor in production support, cost of ownership, and long-term maintainability — so what gets built is something your team can actually own, operate, and extend.',
     },
 ];
 
 const clientSituations: string[] = [
-    'A legacy application needs to be modernized without interrupting day-to-day operations.',
-    'A component, framework, or hosting approach is no longer supported and needs a responsible replacement plan.',
-    'Performance, response time, or workflow friction is slowing down the people who rely on the system.',
-    'A team needs a clearer API boundary so the UI, business logic, and data model can evolve more safely.',
-    'Cloud adoption is on the table, but the business needs someone who can translate architecture into delivery.',
-    'A custom workflow is important enough that off-the-shelf software is creating more compromise than value.',
+    'A legacy application needs to be modernized without interrupting the operations that depend on it.',
+    'A component, framework, or hosting environment is no longer supported — and the replacement needs to be handled responsibly.',
+    'Performance issues or workflow friction are slowing down the people the system is supposed to serve.',
+    'The team needs cleaner API boundaries so the UI, business logic, and data model can evolve without constant breakage.',
+    'Cloud adoption is the right move, but the business needs someone who can connect architecture decisions to actual delivery.',
+    'A workflow is critical enough that forcing it into off-the-shelf software is creating more compromise than value.',
 ];
 
 const deliveryPhases: DeliveryPhase[] = [
@@ -279,15 +283,15 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
                             Software Consulting
                         </Typography>
                         <Typography variant='h2' sx={sx.heroTitle}>
-                            Software engineering for systems that already
-                            matter.
+                            Senior-level engineering for complex, high-stakes
+                            systems.
                         </Typography>
                         <Typography sx={sx.heroCopy}>
-                            I help organizations improve, modernize, and extend
-                            important software systems. That includes custom
-                            application delivery, architectural cleanup, cloud
-                            migration, API design, and the practical leadership
-                            needed to move work from idea to release.
+                            I work with organizations that need more than a
+                            developer — they need someone who can assess what's
+                            broken, design what comes next, and lead the work
+                            from concept to production. Custom applications,
+                            legacy modernization, cloud migration, API design.
                         </Typography>
                         <Stack sx={sx.actionRow} direction='row'>
                             <Button
@@ -323,10 +327,10 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
                 <Box sx={sx.section}>
                     <Typography sx={sx.sectionTitle}>Where I help</Typography>
                     <Typography sx={sx.sectionIntro}>
-                        Instead of separating custom software, enterprise work,
-                        and modernization into different pages, the better way
-                        to understand the work is by the kind of outcome you
-                        need.
+                        The work doesn't fit neatly into categories — but the
+                        outcomes do. Whether the system needs to be fixed,
+                        built, or led, the engagement is shaped around what you
+                        actually need to accomplish.
                     </Typography>
                     <Grid container spacing={3} sx={sx.cardGrid}>
                         {capabilityCards.map((card) => (
@@ -348,11 +352,11 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
 
                 <Box sx={sx.section}>
                     <Typography sx={sx.sectionTitle}>
-                        Common client situations
+                        Does this sound familiar?
                     </Typography>
                     <Typography sx={sx.sectionIntro}>
-                        These are the kinds of problems that usually justify a
-                        focused engineering engagement.
+                        These are the situations that usually bring
+                        organizations to me.
                     </Typography>
                     <Box component='ul' sx={sx.bulletListWide}>
                         {clientSituations.map((item) => (

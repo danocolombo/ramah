@@ -1,14 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 294.4 180" style="enable-background:new 0 0 294.4 180;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:#FFFFFF;}
-	.st2{font-family:'ArialMT';}
-	.st3{font-size:8px;}
-</style>
-<path d="M294.4,0L166.3,227H-4V0H294.4z"/>
-<path class="st0" d="M111-24v376"/>
-<text transform="matrix(1 0 0 1 5 175)" class="st1 st2 st3">© Dano Colombo 2021-22</text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 294.4 180">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+
+      .st1 {
+        fill: #fff;
+        font-family: ArialMT, Arial;
+        font-size: 8px;
+        isolation: isolate;
+      }
+    </style>
+  </defs>
+  <path d="M294.4,0l-128.1,227H-4V0h298.4Z"/>
+  <path class="st0" d="M111-24v376"/>
+  <text class="st1" transform="translate(5 175)"><tspan x="0" y="0">© Dano Colombo 2021-26</tspan></text>
 </svg>
