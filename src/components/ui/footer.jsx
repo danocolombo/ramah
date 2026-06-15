@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import FooterLink from './FooterLink';
-import footerAdornment from '../../assets/FooterGraphic.svg';
 import linkedIn from '../../assets/LinkedInLogo.png';
 
 const HOME_LINK = { label: 'Home', to: '/' };
@@ -30,18 +29,9 @@ function getFooterSx(theme) {
             width: '100%',
             zIndex: 1302,
             position: 'relative',
+            height: '120px',
             [theme.breakpoints.down('md')]: {
                 height: '75px',
-            },
-        },
-        adornment: {
-            width: '25em',
-            verticalAlign: 'bottom',
-            [theme.breakpoints.down('md')]: {
-                width: '21em',
-            },
-            [theme.breakpoints.down('xs')]: {
-                width: '15em',
             },
         },
         navContainer: {
@@ -70,14 +60,13 @@ function getFooterSx(theme) {
         },
         socialContainer: {
             position: 'absolute',
-            marginTop: '-2.5em',
-            left: '.5em',
-            [theme.breakpoints.down('xs')]: {
-                height: '70%',
-            },
-            [theme.breakpoints.down('md')]: {
-                marginTop: '1em',
-            },
+            bottom: '0.75em',
+            left: '0.5em',
+        },
+        copyright: {
+            fontSize: '0.75rem',
+            color: 'white',
+            mt: '0.25em',
         },
         email: {
             fontSize: '1em',
@@ -116,14 +105,6 @@ export default function Footer({ setValue, setSelectedIndex }) {
                     </Box>
                 </Box>
             )}
-            {!matchesMD && (
-                <Box
-                    component='img'
-                    alt='black decorative slash'
-                    src={footerAdornment}
-                    sx={sx.adornment}
-                />
-            )}
             <Grid
                 container
                 direction='column'
@@ -143,6 +124,9 @@ export default function Footer({ setValue, setSelectedIndex }) {
                         alt='Linked In logo'
                         sx={sx.linkedInIcon}
                     />
+                </Grid>
+                <Grid item>
+                    <Typography sx={sx.copyright}>© Dano Colombo 2021-26</Typography>
                 </Grid>
                 {matchesMD && (
                     <Grid item>
