@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import ButtonArrow from './ButtonArrow';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import background from '../../assets/kitchenIngredients.svg';
-import mobileBackground from '../../assets/kitchenIngredients.svg';
+import background from '../../assets/kitchenIngredients.webp';
+import mobileBackground from '../../assets/kitchenIngredients.webp';
 
 function getKitchenSx(theme) {
     return {

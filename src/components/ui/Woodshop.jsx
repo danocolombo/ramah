@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import ButtonArrow from './ButtonArrow';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import background from '../../assets/woodshop.svg';
-import mobileBackground from '../../assets/shoptoolsMobile.png';
+import background from '../../assets/woodshop.webp';
+import mobileBackground from '../../assets/shoptoolsMobile.webp';
 
 function getWoodshopSx(theme) {
     return {

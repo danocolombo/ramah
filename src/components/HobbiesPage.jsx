@@ -25,14 +25,14 @@ import Collapse from '@mui/material/Collapse';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
-import TechSledPic from '../assets/TechSled.svg';
-import CoatRack from '../assets/WS-Coat-Rack.svg';
-import ShoeBench from '../assets/WS-Shoe-Bench.svg';
-import Desk from '../assets/WS-Desk.svg';
+import TechSledPic from '../assets/TechSled.webp';
+import CoatRack from '../assets/WS-Coat-Rack.webp';
+import ShoeBench from '../assets/WS-Shoe-Bench.webp';
+import Desk from '../assets/WS-Desk.webp';
 //kitchen images
-import SalsaPic from '../assets/kitchen/salsa.svg';
-import GuacPic from '../assets/kitchen/guac-square.png';
-import BBQChickenMarinade from '../assets/kitchen/marinaded-chicken.png';
+import SalsaPic from '../assets/kitchen/salsa.webp';
+import GuacPic from '../assets/kitchen/guac-square.webp';
+import BBQChickenMarinade from '../assets/kitchen/marinaded-chicken.webp';
 
 //========================================
 // * Don' forget this
