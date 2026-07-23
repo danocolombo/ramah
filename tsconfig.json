@@ -3,10 +3,15 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "react",
-    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "allowJs": true,
     "checkJs": false,
+    "strict": true,
+    "noEmit": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
     "types": ["vite/client"]
   },
   "include": ["src"]

@@ -63,7 +63,7 @@ export default function InfoCardGrid({
     return (
         <Grid container spacing={3}>
             {items.map((item) => (
-                <Grid item key={item.title} {...itemSize}>
+                <Grid key={item.title} size={itemSize}>
                     <Card sx={sx.card}>
                         <CardContent>
                             {item.mediaSrc ? (

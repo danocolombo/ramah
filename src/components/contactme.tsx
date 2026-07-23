@@ -179,8 +179,7 @@ export default function Contact() {
       <Grid
         container
         spacing={isMobile ? 3 : 6}
-        direction={isMobile ? "column" : "row"}
-        alignItems="flex-start"
+        sx={{ flexDirection: isMobile ? "column" : "row", alignItems: "flex-start" }}
       >
         {/* ── Left panel: info + direct email link ── */}
         <Grid sx={{ width: isMobile ? "100%" : 320, flexShrink: 0 }}>
@@ -356,15 +355,14 @@ export default function Contact() {
                       onChange={(e) => setCaptchaInput(e.target.value)}
                       error={captchaInput.length > 0 && !captchaCorrect}
                       helperText={captchaInput.length > 0 && !captchaCorrect ? "Incorrect" : " "}
-                      inputProps={{ min: 0, max: 99, style: { width: 60, textAlign: "center" } }}
+                      slotProps={{ htmlInput: { min: 0, max: 99, style: { width: 60, textAlign: "center" } } }}
                     />
                   </Box>
                 </Grid>
 
                 {/* Submit — color="primary" pulls palette.primary.main (#0000FF) + contrastText from theme */}
                 <Grid
-                  item
-                  xs={12}
+                  size={12}
                   sx={{
                     display: "flex",
                     justifyContent: isMobile ? "center" : "flex-end",

@@ -263,7 +263,7 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
 
     return (
         <Box sx={sx.mainContainer}>
-            <Grid item sx={sx.breadcrumbsContainer}>
+            <Grid sx={sx.breadcrumbsContainer}>
                 <Breadcrumbs aria-label='breadcrumb'>
                     <Link
                         component={RouterLink}
@@ -334,7 +334,7 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
                     </Typography>
                     <Grid container spacing={3} sx={sx.cardGrid}>
                         {capabilityCards.map((card) => (
-                            <Grid item xs={12} lg={4} key={card.title}>
+                            <Grid size={{ xs: 12, lg: 4 }} key={card.title}>
                                 <Card sx={sx.infoCard}>
                                     <CardContent>
                                         <Typography sx={sx.cardTitle}>
@@ -377,7 +377,7 @@ export default function EngineeringPage({ setValue }: PageNavProps) {
                     </Typography>
                     <Grid container spacing={3}>
                         {deliveryPhases.map((phase) => (
-                            <Grid item xs={12} lg={6} key={phase.label}>
+                            <Grid size={{ xs: 12, lg: 6 }} key={phase.label}>
                                 <Card sx={sx.timelineCard}>
                                     <CardContent>
                                         <Typography sx={sx.phaseLabel}>
